@@ -1,7 +1,7 @@
-import Catalog from '../catalog/catalog';
+import CatalogPage from '../catalog-page/catalog-page';
 
 function App(): JSX.Element {
-  return <Catalog />;
+  return <CatalogPage />;
 }
 
 export default App;
