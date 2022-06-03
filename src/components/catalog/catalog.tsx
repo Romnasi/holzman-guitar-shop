@@ -1,9 +1,11 @@
 import Header from '../header/header';
+import Footer from '../footer/footer';
 
 function Catalog(): JSX.Element {
   return (
     <div className="wrapper">
-      <Header></Header>
+      <Header/>
+      <Footer/>
     </div>
   );
 }
