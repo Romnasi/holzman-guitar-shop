@@ -7,11 +7,11 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={AppRoute.CATALOG}>
+        <Route exact path={AppRoute.CATALOG}>
           <CatalogPage />
         </Route>
 
-        <Route path={AppRoute.CATALOG_PAGINATION}>
+        <Route exact path={AppRoute.CATALOG_PAGINATION}>
           <CatalogPage />
         </Route>
 

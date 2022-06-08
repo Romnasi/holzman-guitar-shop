@@ -15,4 +15,6 @@ export type GuitarsData = CardDataProps[];
 export type CatalogData = {
   guitars: CardDataProps[];
   isDataLoaded: boolean;
+  curPagination: number;
+  guitarNumber: number;
 };

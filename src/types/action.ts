@@ -10,7 +10,8 @@ import {State} from '../types/state';
 
 export enum ActionType {
   LoadGuitars = 'data/loadGuitars',
-  RedirectToRoute = 'ui/redirectToRoute'
+  ChangeCurPagination = 'data/changeCurPagination',
+  RedirectToRoute = 'ui/redirectToRoute',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

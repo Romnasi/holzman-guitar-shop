@@ -1,10 +1,14 @@
 import { useSelector } from 'react-redux';
-import { getGuitars, getLoadedDataStatus } from '../../store/catalog-data/selectors';
+import { getCurPagination, getGuitars, getLoadedDataStatus } from '../../store/catalog-data/selectors';
 import ProductCard from '../product-card/product-card';
-// import { cardsData } from './mock-cards';
+import { PaginationData } from '../../const/pagination';
 
 function CatalogCards(): JSX.Element {
+  const curPagination = useSelector(getCurPagination);
   const guitars = useSelector(getGuitars);
+  const startIndex = PaginationData.CARD_PER_PAGE * (curPagination - 1);
+  const endIndex = PaginationData.CARD_PER_PAGE * curPagination;
+  const curGuitars = guitars.slice(startIndex, endIndex);
   const isDataLoaded = useSelector(getLoadedDataStatus);
 
   if (!isDataLoaded) {
@@ -13,7 +17,7 @@ function CatalogCards(): JSX.Element {
 
   return (
     <div className="cards catalog__cards">
-      {guitars.map((cardData) => <ProductCard key={cardData.id} {...cardData} />)}
+      {curGuitars.map((cardData) => <ProductCard key={cardData.id} {...cardData} />)}
     </div>
   );
 }

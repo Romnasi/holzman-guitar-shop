@@ -1,18 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { getPageNumbers, getNextPage, getPrevPage } from '../../utils/pagination';
 import { PaginationData } from '../../const/pagination';
 import { Link, useParams, Redirect } from 'react-router-dom';
-
-const itemNumber = 45; // temp
+import { useSelector, useDispatch } from 'react-redux';
+import { getCurPagination, getGuitarNumber } from '../../store/catalog-data/selectors';
+import { changeCurPagination } from '../../store/action';
 
 function Pagination(): JSX.Element {
-  const [activePage, setActivePage] = useState(PaginationData.DEFAULT_ACTIVE_PAGE);
+  const itemNumber = useSelector(getGuitarNumber);
+  const activePage = useSelector(getCurPagination);
+  const dispatch = useDispatch();
   const { paginationNumber } = useParams<{ paginationNumber: string }>();
 
   useEffect(() => {
     if (paginationNumber) {
       const pageNumber = Number(paginationNumber.split('page_')[1]);
-      setActivePage(Number(pageNumber));
+      dispatch(changeCurPagination(pageNumber));
     }
   }, [paginationNumber]);
 
@@ -49,7 +52,7 @@ function Pagination(): JSX.Element {
             <li key={pageNumber} className={itemClassName} >
               <Link
                 className="link pagination__page-link"
-                onClick={() => setActivePage(pageNumber)}
+                onClick={() => dispatch(changeCurPagination(pageNumber))}
                 to={`/catalog/page_${pageNumber}`}
               >
                 {pageNumber}

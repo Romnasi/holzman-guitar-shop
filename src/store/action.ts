@@ -12,6 +12,15 @@ export const loadGuitars = createAction(
   }),
 );
 
+export const changeCurPagination = createAction(
+  ActionType.ChangeCurPagination,
+  (curPagination: number) => ({
+    payload: {
+      curPagination,
+    },
+  }),
+);
+
 export const redirectToRoute = createAction(
   ActionType.RedirectToRoute,
   (url: AppRoute) => ({
