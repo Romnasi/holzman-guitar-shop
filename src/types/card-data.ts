@@ -1,3 +1,8 @@
+export type RateProps = {
+  stringCount: number;
+  rating: number;
+}
+
 export type CardDataProps = {
   id: number;
   name: string;
