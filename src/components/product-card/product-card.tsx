@@ -16,6 +16,7 @@ function ProductCard({ name, previewImg, price, type, stringCount, rating, vendo
         <ProductRate
           stringCount={stringCount}
           rating={rating}
+          classNames={'product-card__rate'}
         />
 
         <p className="product-card__title">{name} {type}</p>
