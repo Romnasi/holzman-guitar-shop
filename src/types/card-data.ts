@@ -1,6 +1,7 @@
 export type RateProps = {
   stringCount: number;
   rating: number;
+  classNames: string;
 }
 
 export type CardDataProps = {

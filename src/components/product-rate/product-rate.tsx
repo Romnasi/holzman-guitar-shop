@@ -1,11 +1,12 @@
 import { getStarsStatus, getEvaluation } from '../../utils/rate';
 import { RateProps } from '../../types/card-data';
 
-function ProductRate({ stringCount, rating }: RateProps): JSX.Element {
+function ProductRate({ stringCount, rating, classNames }: RateProps): JSX.Element {
   const starsStatus = getStarsStatus(rating);
+  const currentClass = `rate ${classNames}`;
 
   return(
-    <div className="rate product-card__rate">
+    <div className={currentClass}>
       {starsStatus.map(({ status, id }) => {
         const starType = status ? '#icon-full-star' : '#icon-star';
 
