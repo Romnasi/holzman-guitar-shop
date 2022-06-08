@@ -1,13 +1,12 @@
 import { CardDataProps } from '../../types/card-data';
-
-const formatter =new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 });
+import { formatter, getBigImagePath } from '../../utils/catalog-product';
 
 function ProductCard({ name, previewImg, price }: CardDataProps): JSX.Element {
   return (
     <article className="product-card">
       <img
         src={previewImg}
-        srcSet={`${previewImg}@2x.jpg 2x`}
+        srcSet={`${getBigImagePath(previewImg)} 2x`}
         width="75" height="190" alt={name}
       />
       <div className="product-card__info">

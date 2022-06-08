@@ -1,16 +1,17 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CatalogPage from '../catalog-page/catalog-page';
 import NotFoundPage from '../not-found-page/not-found-page';
+import { AppRoute } from '../../const/app-route';
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/catalog">
+        <Route path={AppRoute.CATALOG}>
           <CatalogPage />
         </Route>
 
-        <Route exact path="/catalog/:paginationNumber">
+        <Route path={AppRoute.CATALOG_PAGINATION}>
           <CatalogPage />
         </Route>
 
