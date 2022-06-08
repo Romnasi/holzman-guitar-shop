@@ -1,4 +1,4 @@
-export interface CardDataProps {
+export type CardDataProps = {
   id: number;
   name: string;
   vendorCode: string;
@@ -9,3 +9,12 @@ export interface CardDataProps {
   rating: number;
   price: number;
 }
+
+export type GuitarsData = CardDataProps[];
+
+export type CatalogData = {
+  guitars: CardDataProps[];
+  isDataLoaded: boolean;
+  curPagination: number;
+  guitarNumber: number;
+};
