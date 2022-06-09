@@ -8,7 +8,7 @@ import { addCurGuitar } from '../../store/action';
 import { CardType } from '../../const/rate';
 
 function ProductCard(props: GuitarData): JSX.Element {
-  const { name, previewImg, price, type, stringCount, rating, vendorCode } = props;
+  const { name, previewImg, price, type, rating, vendorCode, id } = props;
   const dispatch = useDispatch();
 
   return (
@@ -20,9 +20,9 @@ function ProductCard(props: GuitarData): JSX.Element {
       />
       <div className="product-card__info">
         <ProductRate
-          stringCount={stringCount}
           rating={rating}
           cardType={CardType.CATALOG}
+          guitarId={id}
         />
 
         <p className="product-card__title">{name} {type}</p>

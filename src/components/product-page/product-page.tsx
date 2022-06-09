@@ -22,7 +22,7 @@ function ProductPage(): JSX.Element {
     dispatch(redirectToRoute(AppRoute.NOT_FOUND));
   }
 
-  const { name, previewImg, stringCount, rating, type, description, price } = guitars[curGuitarIdx];
+  const { name, previewImg, stringCount, rating, type, description, price, id: guitarId } = guitars[curGuitarIdx];
 
   return(
     <div className="wrapper">
@@ -46,9 +46,9 @@ function ProductPage(): JSX.Element {
               </h2>
 
               <ProductRate
-                stringCount={stringCount}
                 rating={rating}
                 cardType={CardType.PRODUCT}
+                guitarId={guitarId}
               />
 
               <ProductTabs id={id} type={type} stringCount={stringCount} description={description} />

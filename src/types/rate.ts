@@ -8,3 +8,7 @@ export type TabsProps = {
 export type RateMap = {
   [key: string]: string;
 }
+
+export type ReviewCounterComponent = {
+  guitarId: number;
+}

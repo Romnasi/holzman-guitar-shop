@@ -36,7 +36,7 @@ const catalogData = createReducer(initialState, (builder) => {
       const {comments} = action.payload;
 
       state.comments = comments;
-      state.isDataLoaded = true;
+      state.isCommentsLoaded = true;
     });
 });
 

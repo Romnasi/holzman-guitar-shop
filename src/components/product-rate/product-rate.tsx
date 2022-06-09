@@ -1,8 +1,9 @@
 import { getStarsStatus, getEvaluation } from '../../utils/rate';
 import { RateProps } from '../../types/card-data';
 import { RateClass, RateStarWidth, RateStarHeight, CardType } from '../../const/rate';
+import ReviewCounter from '../review-counter/review-counter';
 
-function ProductRate({ stringCount, rating, cardType }: RateProps): JSX.Element {
+function ProductRate({ rating, cardType, guitarId }: RateProps): JSX.Element {
   const starsStatus = getStarsStatus(rating);
 
   return(
@@ -28,9 +29,7 @@ function ProductRate({ stringCount, rating, cardType }: RateProps): JSX.Element 
 
       {
         cardType === CardType.CATALOG &&
-        <p className="rate__count">
-          <span className="visually-hidden">Всего оценок:</span>{stringCount}
-        </p>
+        <ReviewCounter guitarId={guitarId} />
       }
     </div>
   );

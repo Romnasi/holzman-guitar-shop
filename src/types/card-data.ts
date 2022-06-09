@@ -1,7 +1,7 @@
 export type RateProps = {
-  stringCount: number;
   rating: number;
   cardType: string;
+  guitarId: number;
 }
 
 export type GuitarData = {
