@@ -21,6 +21,15 @@ export const changeCurPagination = createAction(
   }),
 );
 
+export const addCurGuitar = createAction(
+  ActionType.AddCurGuitar,
+  (curGuitar: CardDataProps) => ({
+    payload: {
+      curGuitar,
+    },
+  }),
+);
+
 export const redirectToRoute = createAction(
   ActionType.RedirectToRoute,
   (url: AppRoute) => ({

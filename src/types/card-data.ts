@@ -23,4 +23,5 @@ export type CatalogData = {
   isDataLoaded: boolean;
   curPagination: number;
   guitarNumber: number;
+  curGuitar: CardDataProps | null;
 };
