@@ -1,7 +1,7 @@
 import { APIRoute } from '../const/api';
-import {ThunkActionResult} from '../types/action';
-import { GuitarData } from '../types/card-data';
-import { loadGuitars } from './action';
+import { ThunkActionResult } from '../types/action';
+import { GuitarData, ReviewData } from '../types/card-data';
+import { loadComments, loadGuitars } from './action';
 
 export const fetchGuitarsAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -9,8 +9,8 @@ export const fetchGuitarsAction = (): ThunkActionResult =>
     dispatch(loadGuitars(data));
   };
 
-export const fetchComments = (): ThunkActionResult =>
+export const fetchCommentsAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<GuitarData[]>(APIRoute.GUITARS);
-    dispatch(loadGuitars(data));
+    const {data} = await api.get<ReviewData[]>(APIRoute.COMMENTS);
+    dispatch(loadComments(data));
   };

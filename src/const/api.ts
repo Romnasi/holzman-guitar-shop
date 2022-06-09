@@ -9,4 +9,5 @@ export enum HTTP_CODE {
 
 export const enum APIRoute {
   GUITARS = '/guitars',
+  COMMENTS = '/comments',
 }

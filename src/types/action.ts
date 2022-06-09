@@ -1,4 +1,4 @@
-import {Action} from 'redux';
+import { Action } from 'redux';
 import {
   ThunkAction,
   ThunkDispatch
@@ -6,10 +6,11 @@ import {
 import {
   AxiosInstance
 } from 'axios';
-import {State} from '../types/state';
+import { State } from '../types/state';
 
 export enum ActionType {
   LoadGuitars = 'data/loadGuitars',
+  LoadComments = 'data/loadComments',
   ChangeCurPagination = 'data/changeCurPagination',
   AddCurGuitar = 'data/addCurGuitar',
   RedirectToRoute = 'ui/redirectToRoute',
