@@ -1,11 +1,11 @@
 import {createAction} from '@reduxjs/toolkit';
 import {ActionType} from '../types/action';
 import { AppRoute } from '../const/app-route';
-import { CardDataProps } from '../types/card-data';
+import { GuitarData } from '../types/card-data';
 
 export const loadGuitars = createAction(
   ActionType.LoadGuitars,
-  (guitars: CardDataProps[]) => ({
+  (guitars: GuitarData[]) => ({
     payload: {
       guitars,
     },
@@ -23,7 +23,7 @@ export const changeCurPagination = createAction(
 
 export const addCurGuitar = createAction(
   ActionType.AddCurGuitar,
-  (curGuitar: CardDataProps) => ({
+  (curGuitar: GuitarData) => ({
     payload: {
       curGuitar,
     },

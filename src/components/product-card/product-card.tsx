@@ -1,5 +1,5 @@
 import { AppRoute } from '../../const/app-route';
-import { CardDataProps } from '../../types/card-data';
+import { GuitarData } from '../../types/card-data';
 import { formatter, getBigImagePath } from '../../utils/catalog-product';
 import ProductRate from '../product-rate/product-rate';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addCurGuitar } from '../../store/action';
 import { CardType } from '../../const/rate';
 
-function ProductCard(props: CardDataProps): JSX.Element {
+function ProductCard(props: GuitarData): JSX.Element {
   const { name, previewImg, price, type, stringCount, rating, vendorCode } = props;
   const dispatch = useDispatch();
 

@@ -7,7 +7,7 @@ import { getGuitars } from '../../store/catalog-data/selectors';
 import { useParams } from 'react-router-dom';
 import { redirectToRoute } from '../../store/action';
 import { AppRoute } from '../../const/app-route';
-import { CardDataProps } from '../../types/card-data';
+import { GuitarData } from '../../types/card-data';
 import { getBigImagePath, formatter } from '../../utils/catalog-product';
 import ProductRate from '../product-rate/product-rate';
 import ProductTabs from '../product-tabs/product-tabs';
@@ -16,7 +16,7 @@ import { CardType } from '../../const/rate';
 function ProductPage(): JSX.Element {
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
-  const guitars: CardDataProps[] = useSelector(getGuitars);
+  const guitars: GuitarData[] = useSelector(getGuitars);
   const curGuitarIdx = guitars.map(({vendorCode}) => vendorCode).indexOf(id);
   if (curGuitarIdx === -1) {
     dispatch(redirectToRoute(AppRoute.NOT_FOUND));
