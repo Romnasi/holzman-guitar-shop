@@ -4,3 +4,7 @@ export type TabsProps = {
   description: string;
   stringCount: number;
 }
+
+export type RateMap = {
+  [key: string]: string;
+}

@@ -5,6 +5,7 @@ import ProductRate from '../product-rate/product-rate';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addCurGuitar } from '../../store/action';
+import { CardType } from '../../const/rate';
 
 function ProductCard(props: CardDataProps): JSX.Element {
   const { name, previewImg, price, type, stringCount, rating, vendorCode } = props;
@@ -21,7 +22,7 @@ function ProductCard(props: CardDataProps): JSX.Element {
         <ProductRate
           stringCount={stringCount}
           rating={rating}
-          classNames={'product-card__rate'}
+          cardType={CardType.CATALOG}
         />
 
         <p className="product-card__title">{name} {type}</p>

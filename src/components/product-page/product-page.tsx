@@ -11,6 +11,7 @@ import { CardDataProps } from '../../types/card-data';
 import { getBigImagePath, formatter } from '../../utils/catalog-product';
 import ProductRate from '../product-rate/product-rate';
 import ProductTabs from '../product-tabs/product-tabs';
+import { CardType } from '../../const/rate';
 
 function ProductPage(): JSX.Element {
   const dispatch = useDispatch();
@@ -47,27 +48,8 @@ function ProductPage(): JSX.Element {
               <ProductRate
                 stringCount={stringCount}
                 rating={rating}
-                classNames={'product-container__rating'}
+                cardType={CardType.PRODUCT}
               />
-
-              {/* <div className="rate product-container__rating">
-                <svg width="14" height="14" aria-hidden="true">
-                  <use xlinkHref="#icon-full-star"></use>
-                </svg>
-                <svg width="14" height="14" aria-hidden="true">
-                  <use xlinkHref="#icon-full-star"></use>
-                </svg>
-                <svg width="14" height="14" aria-hidden="true">
-                  <use xlinkHref="#icon-full-star"></use>
-                </svg>
-                <svg width="14" height="14" aria-hidden="true">
-                  <use xlinkHref="#icon-full-star"></use>
-                </svg>
-                <svg width="14" height="14" aria-hidden="true">
-                  <use xlinkHref="#icon-star"></use>
-                </svg>
-                <p className="visually-hidden">Оценка: Хорошо</p>
-              </div> */}
 
               <ProductTabs id={id} type={type} stringCount={stringCount} description={description} />
             </div>
