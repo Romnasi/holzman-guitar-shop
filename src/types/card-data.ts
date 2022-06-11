@@ -1,7 +1,9 @@
+import { ReviewData } from './review';
+
 export type RateProps = {
   rating: number;
   cardType: string;
-  guitarId: number;
+  guitarId?: number;
 }
 
 export type GuitarData = {
@@ -14,17 +16,6 @@ export type GuitarData = {
   stringCount: number;
   rating: number;
   price: number;
-}
-
-export type ReviewData = {
-  id: string;
-  userName: string;
-  advantage: string;
-  disadvantage: string;
-  comment:string;
-  rating: number;
-  createAt: Date,
-  guitarId: number;
 }
 
 export type GuitarsData = GuitarData[];

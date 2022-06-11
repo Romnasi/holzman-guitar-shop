@@ -28,7 +28,7 @@ function ProductRate({ rating, cardType, guitarId }: RateProps): JSX.Element {
       </p>
 
       {
-        cardType === CardType.CATALOG &&
+        cardType === CardType.CATALOG && guitarId &&
         <ReviewCounter guitarId={guitarId} />
       }
     </div>
