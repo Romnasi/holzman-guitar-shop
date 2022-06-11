@@ -1,13 +1,16 @@
-import {createReducer} from '@reduxjs/toolkit';
-import { changeCurPagination, loadGuitars } from '../action';
+import { createReducer } from '@reduxjs/toolkit';
+import { addCurGuitar, changeCurPagination, loadComments, loadGuitars } from '../action';
 import { CatalogData } from '../../types/card-data';
 import { PaginationData } from '../../const/pagination';
 
 const initialState: CatalogData = {
   guitars: [],
+  comments: [],
   isDataLoaded: false,
+  isCommentsLoaded: false,
   curPagination: PaginationData.DEFAULT_ACTIVE_PAGE,
   guitarNumber: 0,
+  curGuitar: null,
 };
 
 const catalogData = createReducer(initialState, (builder) => {
@@ -23,6 +26,17 @@ const catalogData = createReducer(initialState, (builder) => {
       const {curPagination} = action.payload;
 
       state.curPagination = curPagination;
+    })
+    .addCase(addCurGuitar, (state, action) => {
+      const {curGuitar} = action.payload;
+
+      state.curGuitar = curGuitar;
+    })
+    .addCase(loadComments, (state, action) => {
+      const {comments} = action.payload;
+
+      state.comments = comments;
+      state.isCommentsLoaded = true;
     });
 });
 

@@ -1,4 +1,10 @@
-export type CardDataProps = {
+export type RateProps = {
+  rating: number;
+  cardType: string;
+  guitarId: number;
+}
+
+export type GuitarData = {
   id: number;
   name: string;
   vendorCode: string;
@@ -10,11 +16,25 @@ export type CardDataProps = {
   price: number;
 }
 
-export type GuitarsData = CardDataProps[];
+export type ReviewData = {
+  id: string;
+  userName: string;
+  advantage: string;
+  disadvantage: string;
+  comment:string;
+  rating: number;
+  createAt: Date,
+  guitarId: number;
+}
+
+export type GuitarsData = GuitarData[];
 
 export type CatalogData = {
-  guitars: CardDataProps[];
+  guitars: GuitarData[];
+  comments: ReviewData[];
   isDataLoaded: boolean;
+  isCommentsLoaded: boolean;
   curPagination: number;
   guitarNumber: number;
+  curGuitar: GuitarData | null;
 };

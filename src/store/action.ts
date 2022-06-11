@@ -1,13 +1,22 @@
-import {createAction} from '@reduxjs/toolkit';
-import {ActionType} from '../types/action';
+import { createAction } from '@reduxjs/toolkit';
+import { ActionType } from '../types/action';
 import { AppRoute } from '../const/app-route';
-import { CardDataProps } from '../types/card-data';
+import { GuitarData, ReviewData } from '../types/card-data';
 
 export const loadGuitars = createAction(
   ActionType.LoadGuitars,
-  (guitars: CardDataProps[]) => ({
+  (guitars: GuitarData[]) => ({
     payload: {
       guitars,
+    },
+  }),
+);
+
+export const loadComments = createAction(
+  ActionType.LoadComments,
+  (comments: ReviewData[]) => ({
+    payload: {
+      comments,
     },
   }),
 );
@@ -17,6 +26,15 @@ export const changeCurPagination = createAction(
   (curPagination: number) => ({
     payload: {
       curPagination,
+    },
+  }),
+);
+
+export const addCurGuitar = createAction(
+  ActionType.AddCurGuitar,
+  (curGuitar: GuitarData) => ({
+    payload: {
+      curGuitar,
     },
   }),
 );

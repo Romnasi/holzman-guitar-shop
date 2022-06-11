@@ -1,9 +1,9 @@
 import {RootState} from '../store/root-reducer';
-import { CardDataProps } from './card-data';
+import { GuitarData } from './card-data';
 
 
 export type CatalogData = {
-  guitars: CardDataProps[],
+  guitars: GuitarData[],
   isDataLoaded: boolean,
 };
 

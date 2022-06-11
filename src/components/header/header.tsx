@@ -1,20 +1,38 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const/app-route';
+
 function Header(): JSX.Element {
   return (
     <header className="header" id="header">
       <div className="container header__wrapper">
-        <a className="header__logo logo">
-          <img className="logo__img" width="70" height="70" src="./img/svg/logo.svg" alt="Логотип" />
-        </a>
+        <Link className="header__logo logo" to={AppRoute.MAIN}>
+          <img
+            className="logo__img"
+            width="70" height="70"
+            src="./img/svg/logo.svg" alt="Логотип"
+          />
+        </Link>
+
         <nav className="main-nav">
           <ul className="main-nav__list">
-            <li><a className="link main-nav__link link--current" href="#">Каталог</a>
+            <li>
+              <Link className="link main-nav__link" to={AppRoute.CATALOG}>
+                Каталог
+              </Link>
             </li>
-            <li><a className="link main-nav__link" href="#">Где купить?</a>
+            <li>
+              <Link className="link main-nav__link" to={AppRoute.MAIN}>
+                Где купить?
+              </Link>
             </li>
-            <li><a className="link main-nav__link" href="#">О компании</a>
+            <li>
+              <Link className="link main-nav__link" to={AppRoute.MAIN}>
+                О компании
+              </Link>
             </li>
           </ul>
         </nav>
+
         <div className="form-search">
           <form className="form-search__form" id="form-search">
             <button className="form-search__submit" type="submit">
