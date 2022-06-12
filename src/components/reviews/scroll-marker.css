@@ -1,0 +1,6 @@
+.scroll-marker {
+  display: block;
+  position: absolute;
+  bottom: -230px;
+  width: 100px;
+}
