@@ -2062,6 +2062,7 @@ button,
 .form-review__input {
   width: 100%;
   padding: 5px 8px;
+  margin-bottom: 10px;
 
   font-size: 14px;
 
