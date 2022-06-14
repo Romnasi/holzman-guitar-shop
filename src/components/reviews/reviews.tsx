@@ -53,7 +53,7 @@ function Reviews({ reviewsData }: ReviewsComponent): JSX.Element {
         handleModalClose={handleModalClose}
         modalClass={'modal--review'}
       >
-        <ReviewForm />
+        <ReviewForm handleModalClose={handleModalClose} />
       </Modal>
 
       {visibleReview.map((review) => <Review key={review.id} {...review} />)}

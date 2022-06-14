@@ -12,3 +12,15 @@ export type ReviewData = {
 export type ReviewsComponent = {
   reviewsData: ReviewData[];
 }
+
+export type ReviewFormValues = {
+  userName: string;
+  rating: string;
+  advantage: string;
+  disadvantage: string;
+  comment: string;
+}
+
+export type ReviewFormComponent = {
+  handleModalClose: () => void;
+}
