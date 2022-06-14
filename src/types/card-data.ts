@@ -18,6 +18,8 @@ export type GuitarData = {
   price: number;
 }
 
+export type CurGuitar = GuitarData | null;
+
 export type GuitarsData = GuitarData[];
 
 export type CatalogData = {

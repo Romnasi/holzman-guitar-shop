@@ -3,13 +3,10 @@ import { GuitarData } from '../../types/card-data';
 import { formatter, getBigImagePath } from '../../utils/catalog-product';
 import ProductRate from '../product-rate/product-rate';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addCurGuitar } from '../../store/action';
 import { CardType } from '../../const/rate';
 
 function ProductCard(props: GuitarData): JSX.Element {
   const { name, previewImg, price, type, rating, vendorCode, id } = props;
-  const dispatch = useDispatch();
 
   return (
     <article className="product-card">
@@ -31,7 +28,6 @@ function ProductCard(props: GuitarData): JSX.Element {
       </div>
       <div className="product-card__buttons">
         <Link
-          onClick={() => dispatch(addCurGuitar(props))}
           className="button button--mini"
           to={`/products/${vendorCode}`}
         >

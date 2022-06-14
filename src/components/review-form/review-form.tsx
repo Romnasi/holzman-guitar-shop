@@ -1,9 +1,15 @@
+import { useSelector } from 'react-redux';
+import { getCurGuitar } from '../../store/catalog-data/selectors';
+
 function ReviewForm(): JSX.Element {
+  const guitarData = useSelector(getCurGuitar);
 
   return(
     <>
       <h2 className="modal__header modal__header--review title title--medium">Оставить отзыв</h2>
-      <h3 className="modal__product-name title title--medium-20 title--uppercase">СURT Z30 Plus</h3>
+      <h3 className="modal__product-name title title--medium-20 title--uppercase">
+        {guitarData?.name}
+      </h3>
       <form className="form-review">
         <div className="form-review__wrapper">
           <div className="form-review__name-wrapper">

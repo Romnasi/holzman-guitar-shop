@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import Reviews from '../reviews/reviews';
 import { getBigImagePath, formatter } from '../../utils/catalog-product';
@@ -5,7 +6,7 @@ import ProductRate from '../product-rate/product-rate';
 import ProductTabs from '../product-tabs/product-tabs';
 import { CardType } from '../../const/rate';
 import { useParams } from 'react-router-dom';
-import { redirectToRoute } from '../../store/action';
+import { redirectToRoute, addCurGuitar } from '../../store/action';
 import { AppRoute } from '../../const/app-route';
 import { GuitarData } from '../../types/card-data';
 import { getGuitars, getComments } from '../../store/catalog-data/selectors';
@@ -19,7 +20,12 @@ function ProductMain(): JSX.Element {
   const comments = useSelector(getComments);
   const guitars: GuitarData[] = useSelector(getGuitars);
   const curGuitarIdx = guitars.map(({vendorCode}) => vendorCode).indexOf(id);
-  const { name, previewImg, stringCount, rating, type, description, price, id: guitarId } = guitars[curGuitarIdx];
+  const curGuitar = guitars[curGuitarIdx];
+  const { name, previewImg, stringCount, rating, type, description, price, id: guitarId } = curGuitar;
+
+  useEffect(() => {
+    dispatch(addCurGuitar(curGuitar));
+  }, []);
 
   const reviewsData = getCurrentSortedReviews(comments, guitarId);
 
