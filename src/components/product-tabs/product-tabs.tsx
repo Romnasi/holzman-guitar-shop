@@ -21,20 +21,20 @@ function ProductTabs({ id, type, description, stringCount }: TabsProps): JSX.Ele
         Описание
       </button>
       <div className="tabs__content" id="characteristics">
-        <table className={isDescHidden ? 'tabs__table' : 'tabs__table hidden'}>
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Артикул:</td>
-            <td className="tabs__value">{id}</td>
-          </tr>
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Тип:</td>
-            <td className="tabs__value">{type}</td>
-          </tr>
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Количество струн:</td>
-            <td className="tabs__value">{stringCount} струнная</td>
-          </tr>
-        </table>
+        <dl className={isDescHidden ? 'tabs__table' : 'tabs__table hidden'}>
+          <div className="tabs__table-row">
+            <dt className="tabs__title">Артикул:</dt>
+            <dd className="tabs__value">{id}</dd>
+          </div>
+          <div className="tabs__table-row">
+            <dt className="tabs__title">Тип:</dt>
+            <dd className="tabs__value">{type}</dd>
+          </div>
+          <div className="tabs__table-row">
+            <dt className="tabs__title">Количество струн:</dt>
+            <dd className="tabs__value">{stringCount} струнная</dd>
+          </div>
+        </dl>
         <p className={isDescHidden ? 'tabs__product-description hidden' : 'tabs__product-description'}>
           {description}
         </p>
