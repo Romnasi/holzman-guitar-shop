@@ -1,98 +1,112 @@
-function Reviews(): JSX.Element {
+import './scroll-marker.css';
+import { useEffect, useState, useRef, useCallback } from 'react';
+import Review from '../review/review';
+import { ReviewsComponent } from '../../types/review';
+import { ReviewConfig } from '../../const/review';
+import { goToTop } from '../../utils/scroll';
+import useOnScreen from '../../hooks/useOnScreen';
+import Modal from '../modal/modal';
+import ReviewForm from '../review-form/review-form';
+import ReviewSuccess from '../review-success/review-success';
+
+
+function Reviews({ reviewsData }: ReviewsComponent): JSX.Element {
+  const [isHiddenModalForm, setIsHiddenModalForm] = useState(true);
+  const [isHiddenModalSuccess, setIsHiddenModalSuccess] = useState(true);
+  const [isHiddenShowButton, setIsHiddenShowButton] = useState(false);
+  const [reviewCount, setReviewCount] = useState(ReviewConfig.DEFAULT_NUMBER);
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useOnScreen(containerRef);
+
+  const maxCount = reviewsData.length;
+  const visibleReview = reviewsData.slice(ReviewConfig.START_INDEX, reviewCount);
+
+  useEffect(() => {
+    if (reviewCount >= maxCount) {
+      setIsHiddenShowButton(true);
+    }
+  }, [reviewCount, maxCount]);
+
+  useEffect(() => {
+    if (isVisible && reviewCount < maxCount) {
+      setReviewCount((prevState) => prevState + ReviewConfig.INCREMENT_STEP);
+    }
+    setIsVisible(false);
+  }, [isVisible, setIsVisible, maxCount, reviewCount]);
+
+  const handleFormModalClose = useCallback(
+    () => {
+      setIsHiddenModalForm(true);
+    }, [],
+  );
+
+  const handleSuccessModalClose = useCallback(
+    () => {
+      setIsHiddenModalSuccess(true);
+    }, [],
+  );
+
+  const openSuccessModal = () => {
+    setTimeout(() => {
+      setIsHiddenModalSuccess(false);
+    }, 2000);
+  };
+
+  const handleReviewSubmit = useCallback(
+    () => {
+      openSuccessModal();
+    }, [],
+  );
+
   return(
     <section className="reviews">
       <h3 className="reviews__title title title--bigger">Отзывы</h3>
-      <a className="button button--red-border button--big reviews__sumbit-button" href="#">
+      <button
+        className="button button--red-border button--big reviews__sumbit-button"
+        onClick={() => setIsHiddenModalForm(false)}
+      >
         Оставить отзыв
-      </a>
-      <div className="review">
-        <div className="review__wrapper">
-          <h4 className="review__title review__title--author title title--lesser">Иванов Максим</h4><span className="review__date">12 декабря</span>
-        </div>
-        <div className="rate review__rating-panel">
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-          <p className="visually-hidden">Оценка: Хорошо</p>
-        </div>
-        <h4 className="review__title title title--lesser">Достоинства:</h4>
-        <p className="review__value">Хороший корпус, чистый звук, стурны хорошего качества</p>
-        <h4 className="review__title title title--lesser">Недостатки:</h4>
-        <p className="review__value">Тугие колонки</p>
-        <h4 className="review__title title title--lesser">Комментарий:</h4>
-        <p className="review__value">У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня.</p>
-      </div>
-      <div className="review">
-        <div className="review__wrapper">
-          <h4 className="review__title review__title--author title title--lesser">Перова Ольга</h4><span className="review__date">12 декабря</span>
-        </div>
-        <div className="rate review__rating-panel">
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-          <p className="visually-hidden">Оценка: Хорошо</p>
-        </div>
-        <h4 className="review__title title title--lesser">Достоинства:</h4>
-        <p className="review__value">Хороший корпус, чистый звук, стурны хорошего качества</p>
-        <h4 className="review__title title title--lesser">Недостатки:</h4>
-        <p className="review__value">Тугие колонки</p>
-        <h4 className="review__title title title--lesser">Комментарий:</h4>
-        <p className="review__value">У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. </p>
-      </div>
-      <div className="review">
-        <div className="review__wrapper">
-          <h4 className="review__title review__title--author title title--lesser">Преображенская  Ксения</h4><span className="review__date">12 декабря</span>
-        </div>
-        <div className="rate review__rating-panel">
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-full-star"></use>
-          </svg>
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-          <p className="visually-hidden">Оценка: Хорошо</p>
-        </div>
-        <h4 className="review__title title title--lesser">Достоинства:</h4>
-        <p className="review__value">Хороший корпус, чистый звук, стурны хорошего качества</p>
-        <h4 className="review__title title title--lesser">Недостатки:</h4>
-        <p className="review__value">Тугие колонки</p>
-        <h4 className="review__title title title--lesser">Комментарий:</h4>
-        <p className="review__value">У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. </p>
-      </div>
-      <button className="button button--medium reviews__more-button">Показать еще отзывы</button><a className="button button--up button--red-border button--big reviews__up-button" href="#header">Наверх</a>
+      </button>
+
+      <Modal
+        isHiddenModal={isHiddenModalForm}
+        handleModalClose={handleFormModalClose}
+        modalClass={'modal--review'}
+      >
+        <ReviewForm
+          handleModalClose={handleFormModalClose}
+          handleReviewSubmit={handleReviewSubmit}
+        />
+      </Modal>
+
+      <Modal
+        isHiddenModal={isHiddenModalSuccess}
+        handleModalClose={handleSuccessModalClose}
+        modalClass={'modal--success'}
+      >
+        <ReviewSuccess handleModalClose={handleSuccessModalClose} />
+      </Modal>
+
+      {visibleReview.map((review) => <Review key={review.id} {...review} />)}
+
+      {
+        !isHiddenShowButton &&
+        <button
+          className="button button--medium reviews__more-button"
+          onClick={() => setReviewCount((prevState) => prevState + ReviewConfig.INCREMENT_STEP)}
+        >
+          Показать еще отзывы
+        </button>
+      }
+
+      <button
+        className="button button--up button--red-border button--big reviews__up-button"
+        onClick={() => goToTop()}
+      >
+        Наверх
+      </button>
+
+      <span ref={containerRef} className="scroll-marker"></span>
     </section>
   );
 }

@@ -1,7 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
 import { AppRoute } from '../const/app-route';
-import { GuitarData, ReviewData } from '../types/card-data';
+import { GuitarData } from '../types/card-data';
+import { ReviewData } from '../types/review';
 
 export const loadGuitars = createAction(
   ActionType.LoadGuitars,
@@ -17,6 +18,15 @@ export const loadComments = createAction(
   (comments: ReviewData[]) => ({
     payload: {
       comments,
+    },
+  }),
+);
+
+export const addComment = createAction(
+  ActionType.AddComment,
+  (comment: ReviewData) => ({
+    payload: {
+      comment,
     },
   }),
 );
@@ -41,7 +51,7 @@ export const addCurGuitar = createAction(
 
 export const redirectToRoute = createAction(
   ActionType.RedirectToRoute,
-  (url: AppRoute) => ({
+  (url: AppRoute | string) => ({
     payload: url,
   }),
 );

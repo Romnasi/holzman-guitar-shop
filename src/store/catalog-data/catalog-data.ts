@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { addCurGuitar, changeCurPagination, loadComments, loadGuitars } from '../action';
+import { addComment, addCurGuitar, changeCurPagination, loadComments, loadGuitars } from '../action';
 import { CatalogData } from '../../types/card-data';
 import { PaginationData } from '../../const/pagination';
 
@@ -37,6 +37,10 @@ const catalogData = createReducer(initialState, (builder) => {
 
       state.comments = comments;
       state.isCommentsLoaded = true;
+    }).addCase(addComment, (state, action) => {
+      const {comment} = action.payload;
+
+      state.comments = [...state.comments, comment];
     });
 });
 

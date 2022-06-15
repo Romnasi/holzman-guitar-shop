@@ -1,3 +1,4 @@
+import { catalogBreadcrumbs } from '../../const/breadcrumbs';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import CatalogCards from '../catalog-cards/catalog-cards';
 import CatalogFilter from '../catalog-filter/catalog-filter';
@@ -9,7 +10,7 @@ function CatalogMain(): JSX.Element {
     <main className="page-content">
       <div className="container">
         <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
-        <Breadcrumbs />
+        <Breadcrumbs crumbs={catalogBreadcrumbs}  />
         <div className="catalog">
           <CatalogFilter />
           <CatalogSort />

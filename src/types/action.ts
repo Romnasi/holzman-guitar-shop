@@ -11,6 +11,7 @@ import { State } from '../types/state';
 export enum ActionType {
   LoadGuitars = 'data/loadGuitars',
   LoadComments = 'data/loadComments',
+  AddComment = 'data/addComments',
   ChangeCurPagination = 'data/changeCurPagination',
   AddCurGuitar = 'data/addCurGuitar',
   RedirectToRoute = 'ui/redirectToRoute',

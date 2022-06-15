@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/app-route';
+import Nav from '../nav/nav';
 
 function Header(): JSX.Element {
   return (
@@ -13,25 +14,7 @@ function Header(): JSX.Element {
           />
         </Link>
 
-        <nav className="main-nav">
-          <ul className="main-nav__list">
-            <li>
-              <Link className="link main-nav__link" to={AppRoute.CATALOG}>
-                Каталог
-              </Link>
-            </li>
-            <li>
-              <Link className="link main-nav__link" to={AppRoute.MAIN}>
-                Где купить?
-              </Link>
-            </li>
-            <li>
-              <Link className="link main-nav__link" to={AppRoute.MAIN}>
-                О компании
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <Nav />
 
         <div className="form-search">
           <form className="form-search__form" id="form-search">
@@ -57,12 +40,12 @@ function Header(): JSX.Element {
             </svg><span className="visually-hidden">Сбросить поиск</span>
           </button>
         </div>
-        <a className="header__cart-link" href="#" aria-label="Корзина">
+        <Link className="header__cart-link" to={AppRoute.CART} aria-label="Корзина">
           <svg className="header__cart-icon" width="14" height="14" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg>
           <span className="visually-hidden">Перейти в корзину</span><span className="header__cart-count">2</span>
-        </a>
+        </Link>
       </div>
     </header>
   );
