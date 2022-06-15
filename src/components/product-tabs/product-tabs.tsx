@@ -1,25 +1,27 @@
-import { useState } from 'react';
 import { TabsProps } from '../../types/rate';
+import { Link, useLocation } from 'react-router-dom';
+import { TabHash } from '../../const/tab-hash';
 
 function ProductTabs({ id, type, description, stringCount }: TabsProps): JSX.Element {
-  const [isDescHidden, setIsDescHidden] = useState(true);
+  const { hash } = useLocation();
+  const isDescHidden = hash === '' || hash === TabHash.CHARACTERISTICS;
   const activeTabButtonClass = 'button button--medium tabs__button';
   const tabButtonClass = 'button button--black-border button--medium tabs__button';
 
   return(
     <div className="tabs">
-      <button
+      <Link
         className={isDescHidden ? activeTabButtonClass : tabButtonClass}
-        onClick={() => setIsDescHidden(true)}
+        to={TabHash.CHARACTERISTICS}
       >
         Характеристики
-      </button>
-      <button
+      </Link>
+      <Link
         className={isDescHidden ? tabButtonClass : activeTabButtonClass}
-        onClick={() => setIsDescHidden(false)}
+        to={TabHash.DESCRIPTION}
       >
         Описание
-      </button>
+      </Link>
       <div className="tabs__content" id="characteristics">
         <dl className={isDescHidden ? 'tabs__table' : 'tabs__table hidden'}>
           <div className="tabs__table-row">
