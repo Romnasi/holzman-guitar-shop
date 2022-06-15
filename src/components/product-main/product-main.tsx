@@ -12,6 +12,7 @@ import { GuitarData } from '../../types/card-data';
 import { getGuitars, getComments } from '../../store/catalog-data/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentSortedReviews } from '../../utils/product';
+import { catalogBreadcrumbs } from '../../const/breadcrumbs';
 
 function ProductMain(): JSX.Element {
   const dispatch = useDispatch();
@@ -19,9 +20,9 @@ function ProductMain(): JSX.Element {
 
   const comments = useSelector(getComments);
   const guitars: GuitarData[] = useSelector(getGuitars);
-  const curGuitarIdx = guitars.map(({vendorCode}) => vendorCode).indexOf(id);
+  const curGuitarIdx = guitars.map(({vendorCode: code}) => code).indexOf(id);
   const curGuitar = guitars[curGuitarIdx];
-  const { name, previewImg, stringCount, rating, type, description, price, id: guitarId } = curGuitar;
+  const { name, previewImg, stringCount, rating, type, description, price, id: guitarId, vendorCode } = curGuitar;
 
   useEffect(() => {
     dispatch(addCurGuitar(curGuitar));
@@ -33,11 +34,17 @@ function ProductMain(): JSX.Element {
     dispatch(redirectToRoute(AppRoute.NOT_FOUND));
   }
 
+  const dynamicLink = {
+    id: 3,
+    linkName: name,
+    path: `${AppRoute.CATALOG}/${vendorCode}`,
+  };
+
   return(
     <main className="page-content">
       <div className="container">
         <h1 className="page-content__title title title--bigger">{name}</h1>
-        <Breadcrumbs />
+        <Breadcrumbs crumbs={catalogBreadcrumbs} dynamicLink={dynamicLink} />
 
         <div className="product-container">
           <img
