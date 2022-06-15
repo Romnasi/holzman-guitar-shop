@@ -7,29 +7,27 @@ import ProductPage from '../product-page/product-page';
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path={AppRoute.MAIN}>
-          <MainPage />
-        </Route>
+    <Switch>
+      <Route exact path={AppRoute.MAIN}>
+        <MainPage />
+      </Route>
 
-        <Route exact path={AppRoute.CATALOG}>
-          <CatalogPage />
-        </Route>
+      <Route exact path={AppRoute.CATALOG}>
+        <CatalogPage />
+      </Route>
 
-        <Route exact path={AppRoute.CATALOG_PAGINATION}>
-          <CatalogPage />
-        </Route>
+      <Route exact path={AppRoute.CATALOG_PAGINATION}>
+        <CatalogPage />
+      </Route>
 
-        <Route exact path={AppRoute.PRODUCT}>
-          <ProductPage />
-        </Route>
+      <Route exact path={AppRoute.PRODUCT}>
+        <ProductPage />
+      </Route>
 
-        <Route path="*">
-          <NotFoundPage />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+      <Route path="*">
+        <NotFoundPage />
+      </Route>
+    </Switch>
   );
 }
 
