@@ -1,13 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getCurGuitar } from '../../store/catalog-data/selectors';
 import { Formik, Form, Field } from 'formik';
 import { ReviewSchema } from '../../validation-schema';
 import { ReviewFormComponent } from '../../types/review';
 import { reviewFormValues } from '../../const/review';
-import { useDispatch } from 'react-redux';
 import { postCommentAction } from '../../store/api-actions';
 
-function ReviewForm({handleModalClose}: ReviewFormComponent): JSX.Element {
+function ReviewForm({ handleModalClose, handleReviewSubmit }: ReviewFormComponent): JSX.Element {
   const guitarData = useSelector(getCurGuitar);
   const dispatch = useDispatch();
 
@@ -38,6 +37,7 @@ function ReviewForm({handleModalClose}: ReviewFormComponent): JSX.Element {
           actions.setSubmitting(false);
           actions.resetForm();
           handleModalClose();
+          handleReviewSubmit();
         }}
       >
         {({ errors, touched }) => (

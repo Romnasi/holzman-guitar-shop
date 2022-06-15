@@ -7,10 +7,12 @@ import { goToTop } from '../../utils/scroll';
 import useOnScreen from '../../hooks/useOnScreen';
 import Modal from '../modal/modal';
 import ReviewForm from '../review-form/review-form';
+import ReviewSuccess from '../review-success/review-success';
 
 
 function Reviews({ reviewsData }: ReviewsComponent): JSX.Element {
-  const [isHiddenModal, setIsHiddenModal] = useState(true);
+  const [isHiddenModalForm, setIsHiddenModalForm] = useState(true);
+  const [isHiddenModalSuccess, setIsHiddenModalSuccess] = useState(true);
   const [isHiddenShowButton, setIsHiddenShowButton] = useState(false);
   const [reviewCount, setReviewCount] = useState(ReviewConfig.DEFAULT_NUMBER);
   const containerRef = useRef(null);
@@ -32,9 +34,27 @@ function Reviews({ reviewsData }: ReviewsComponent): JSX.Element {
     setIsVisible(false);
   }, [isVisible, setIsVisible, maxCount, reviewCount]);
 
-  const handleModalClose = useCallback(
+  const handleFormModalClose = useCallback(
     () => {
-      setIsHiddenModal(true);
+      setIsHiddenModalForm(true);
+    }, [],
+  );
+
+  const handleSuccessModalClose = useCallback(
+    () => {
+      setIsHiddenModalSuccess(true);
+    }, [],
+  );
+
+  const openSuccessModal = () => {
+    setTimeout(() => {
+      setIsHiddenModalSuccess(false);
+    }, 2000);
+  };
+
+  const handleReviewSubmit = useCallback(
+    () => {
+      openSuccessModal();
     }, [],
   );
 
@@ -43,17 +63,28 @@ function Reviews({ reviewsData }: ReviewsComponent): JSX.Element {
       <h3 className="reviews__title title title--bigger">Отзывы</h3>
       <button
         className="button button--red-border button--big reviews__sumbit-button"
-        onClick={() => setIsHiddenModal(false)}
+        onClick={() => setIsHiddenModalForm(false)}
       >
-        Оставить отзыв {isVisible && 'Yep, I am on screen'}
+        Оставить отзыв
       </button>
 
       <Modal
-        isHiddenModal={isHiddenModal}
-        handleModalClose={handleModalClose}
+        isHiddenModal={isHiddenModalForm}
+        handleModalClose={handleFormModalClose}
         modalClass={'modal--review'}
       >
-        <ReviewForm handleModalClose={handleModalClose} />
+        <ReviewForm
+          handleModalClose={handleFormModalClose}
+          handleReviewSubmit={handleReviewSubmit}
+        />
+      </Modal>
+
+      <Modal
+        isHiddenModal={isHiddenModalSuccess}
+        handleModalClose={handleSuccessModalClose}
+        modalClass={'modal--success'}
+      >
+        <ReviewSuccess handleModalClose={handleSuccessModalClose} />
       </Modal>
 
       {visibleReview.map((review) => <Review key={review.id} {...review} />)}

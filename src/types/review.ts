@@ -32,4 +32,5 @@ export type ReviewFormValues = {
 
 export type ReviewFormComponent = {
   handleModalClose: () => void;
+  handleReviewSubmit: () => void;
 }
