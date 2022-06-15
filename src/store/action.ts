@@ -22,6 +22,15 @@ export const loadComments = createAction(
   }),
 );
 
+export const addComment = createAction(
+  ActionType.AddComment,
+  (comment: ReviewData) => ({
+    payload: {
+      comment,
+    },
+  }),
+);
+
 export const changeCurPagination = createAction(
   ActionType.ChangeCurPagination,
   (curPagination: number) => ({

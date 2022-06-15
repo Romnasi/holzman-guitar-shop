@@ -4,9 +4,12 @@ import { Formik, Form, Field } from 'formik';
 import { ReviewSchema } from '../../validation-schema';
 import { ReviewFormComponent } from '../../types/review';
 import { reviewFormValues } from '../../const/review';
+import { useDispatch } from 'react-redux';
+import { postCommentAction } from '../../store/api-actions';
 
 function ReviewForm({handleModalClose}: ReviewFormComponent): JSX.Element {
   const guitarData = useSelector(getCurGuitar);
+  const dispatch = useDispatch();
 
   return(
     <>
@@ -19,7 +22,19 @@ function ReviewForm({handleModalClose}: ReviewFormComponent): JSX.Element {
       <Formik
         initialValues={reviewFormValues}
         validationSchema={ReviewSchema}
-        onSubmit={(values, actions) => {
+        onSubmit={({ userName, advantage, disadvantage, comment, rating }, actions) => {
+          if (!guitarData) {
+            return;
+          }
+          const { id } = guitarData;
+          dispatch(postCommentAction({
+            guitarId: id,
+            userName,
+            advantage,
+            disadvantage,
+            comment,
+            rating: Number(rating),
+          }));
           actions.setSubmitting(false);
           actions.resetForm();
           handleModalClose();

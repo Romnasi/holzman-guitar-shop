@@ -9,6 +9,15 @@ export type ReviewData = {
   guitarId: number;
 }
 
+export type ReviewPostData = {
+  guitarId: number;
+  userName: string;
+  advantage: string;
+  disadvantage: string;
+  comment:string;
+  rating: number;
+}
+
 export type ReviewsComponent = {
   reviewsData: ReviewData[];
 }
