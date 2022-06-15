@@ -51,7 +51,7 @@ export const addCurGuitar = createAction(
 
 export const redirectToRoute = createAction(
   ActionType.RedirectToRoute,
-  (url: AppRoute) => ({
+  (url: AppRoute | string) => ({
     payload: url,
   }),
 );
