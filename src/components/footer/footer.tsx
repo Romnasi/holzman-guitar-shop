@@ -1,19 +1,15 @@
 import Logo from '../logo/logo';
 import { LogoType } from '../../const/nav';
 import Socials from '../socials/socials';
+import InfoAboutUs from '../info-about-us/info-about-us';
 
 function Footer(): JSX.Element {
   return (
     <footer className="footer">
       <div className="footer__container container">
         <Logo type={LogoType.FOOTER} />
-
         <Socials />
-
-        <section className="footer__nav-section footer__nav-section--info">
-          <h2 className="footer__nav-title">О нас</h2>
-          <p className="footer__nav-content footer__nav-content--font-secondary">Магазин гитар, музыкальных инструментов и гитарная мастерская <br/> в Санкт-Петербурге.<br/><br/>Все инструменты проверены, отстроены<br/> и доведены до идеала!</p>
-        </section>
+        <InfoAboutUs />
 
         <section className="footer__nav-section footer__nav-section--links">
           <h2 className="footer__nav-title">Информация</h2>
