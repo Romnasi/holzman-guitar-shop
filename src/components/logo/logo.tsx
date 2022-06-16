@@ -3,7 +3,7 @@ import { AppRoute } from '../../const/app-route';
 import { LogoComponent } from '../../types/logo';
 import { LogoType } from '../../const/nav';
 
-function Logo({type}: LogoComponent): JSX.Element {
+function Logo({type = LogoType.HEADER}: LogoComponent): JSX.Element {
   const htmlClass = type === LogoType.FOOTER ? 'footer__logo logo'  : 'header__logo logo';
   return(
     <Link className={htmlClass} to={AppRoute.MAIN}>
