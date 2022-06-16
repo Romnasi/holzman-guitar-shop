@@ -1,18 +1,14 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/app-route';
+import Logo from '../logo/logo';
+import { LogoType } from '../../const/nav';
 import Nav from '../nav/nav';
 
 function Header(): JSX.Element {
   return (
     <header className="header" id="header">
       <div className="container header__wrapper">
-        <Link className="header__logo logo" to={AppRoute.MAIN}>
-          <img
-            className="logo__img"
-            width="70" height="70"
-            src="./img/svg/logo.svg" alt="Логотип"
-          />
-        </Link>
+        <Logo type={LogoType.HEADER} />
 
         <Nav />
 
