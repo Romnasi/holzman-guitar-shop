@@ -1,40 +1,20 @@
 import Logo from '../logo/logo';
 import { LogoType } from '../../const/nav';
+import Socials from '../socials/socials';
 
 function Footer(): JSX.Element {
   return (
     <footer className="footer">
       <div className="footer__container container">
         <Logo type={LogoType.FOOTER} />
-        <div className="socials footer__socials">
-          <ul className="socials__list">
-            <li className="socials-item">
-              <a className="socials__link" href="https://www.skype.com/" aria-label="skype">
-                <svg className="socials__icon" width="24" height="24" aria-hidden="true">
-                  <use xlinkHref="#icon-skype"></use>
-                </svg>
-              </a>
-            </li>
-            <li className="socials-item">
-              <a className="socials__link" href="https://www.vsco.com/" aria-label="vsco">
-                <svg className="socials__icon" width="24" height="24" aria-hidden="true">
-                  <use xlinkHref="#icon-vsco"></use>
-                </svg>
-              </a>
-            </li>
-            <li className="socials-item">
-              <a className="socials__link" href="https://www.pinterest.com/" aria-label="pinterest">
-                <svg className="socials__icon" width="24" height="24" aria-hidden="true">
-                  <use xlinkHref="#icon-pinterest"></use>
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
+
+        <Socials />
+
         <section className="footer__nav-section footer__nav-section--info">
           <h2 className="footer__nav-title">О нас</h2>
           <p className="footer__nav-content footer__nav-content--font-secondary">Магазин гитар, музыкальных инструментов и гитарная мастерская <br/> в Санкт-Петербурге.<br/><br/>Все инструменты проверены, отстроены<br/> и доведены до идеала!</p>
         </section>
+
         <section className="footer__nav-section footer__nav-section--links">
           <h2 className="footer__nav-title">Информация</h2>
           <ul className="footer__nav-list">
@@ -55,6 +35,7 @@ function Footer(): JSX.Element {
             </li>
           </ul>
         </section>
+
         <section className="footer__nav-section footer__nav-section--contacts">
           <h2 className="footer__nav-title">Контакты</h2>
           <p className="footer__nav-content">
@@ -76,6 +57,7 @@ function Footer(): JSX.Element {
             </span>
           </p>
         </section>
+
       </div>
     </footer>
   );
