@@ -5,9 +5,7 @@ import ProductRate from '../product-rate/product-rate';
 import { Link } from 'react-router-dom';
 import { CardType } from '../../const/rate';
 
-function ProductCard(props: GuitarData): JSX.Element {
-  const { name, previewImg, price, type, rating, vendorCode, id } = props;
-
+function ProductCard({ name, previewImg, price, type, rating, vendorCode, id }: GuitarData): JSX.Element {
   return (
     <article className="product-card">
       <img
