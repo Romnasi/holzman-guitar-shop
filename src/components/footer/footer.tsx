@@ -2,6 +2,7 @@ import Logo from '../logo/logo';
 import { LogoType } from '../../const/nav';
 import Socials from '../socials/socials';
 import InfoAboutUs from '../info-about-us/info-about-us';
+import InfoLinks from '../info-links/info-links';
 
 function Footer(): JSX.Element {
   return (
@@ -10,27 +11,7 @@ function Footer(): JSX.Element {
         <Logo type={LogoType.FOOTER} />
         <Socials />
         <InfoAboutUs />
-
-        <section className="footer__nav-section footer__nav-section--links">
-          <h2 className="footer__nav-title">Информация</h2>
-          <ul className="footer__nav-list">
-            <li className="footer__nav-list-item">
-              <a className="link" href="#top">Где купить?</a>
-            </li>
-            <li className="footer__nav-list-item">
-              <a className="link" href="#top">Блог</a>
-            </li>
-            <li className="footer__nav-list-item">
-              <a className="link" href="#top">Вопрос - ответ</a>
-            </li>
-            <li className="footer__nav-list-item">
-              <a className="link" href="#top">Возврат</a>
-            </li>
-            <li className="footer__nav-list-item">
-              <a className="link" href="#top">Сервис-центры</a>
-            </li>
-          </ul>
-        </section>
+        <InfoLinks />
 
         <section className="footer__nav-section footer__nav-section--contacts">
           <h2 className="footer__nav-title">Контакты</h2>
