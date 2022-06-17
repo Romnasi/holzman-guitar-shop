@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import InfoLinks from './info-links';
 
 describe('Component: InfoLinks', () => {
-  it('should render correctly ', () => {
+  it('should render correctly', () => {
     render(<InfoLinks />);
 
     expect(screen.getByText('Информация')).toBeInTheDocument();
