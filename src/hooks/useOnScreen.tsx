@@ -12,13 +12,15 @@ function useOnScreen(ref: React.RefObject<HTMLButtonElement>): UseOnScreen {
   };
 
   useEffect(() => {
+    let observerRefValue: HTMLButtonElement | null = null;
     const observer = new IntersectionObserver(cb, intersectionObserverOptions);
     if (ref.current) {
       observer.observe(ref.current);
+      observerRefValue = ref.current;
     }
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (observerRefValue) {
+        observer.unobserve(observerRefValue);
       }
     };
   }, [ref]);

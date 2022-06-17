@@ -30,7 +30,7 @@ function ProductMain(): JSX.Element {
     } else {
       dispatch(redirectToRoute(AppRoute.NOT_FOUND));
     }
-  }, []);
+  }, [curGuitarIdx, curGuitar, dispatch]);
 
   if (!curGuitar) {
     return <LoadingScreen />;

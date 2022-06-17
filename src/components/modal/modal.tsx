@@ -15,7 +15,7 @@ function Modal({ children, isHiddenModal, modalClass, handleModalClose }: ModalC
     };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  },[]);
+  },[handleModalClose]);
 
   useEffect(() => {
     if (!isHiddenModal)  {
