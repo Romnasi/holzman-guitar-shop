@@ -21,6 +21,9 @@ const store = mockStore({
   },
 });
 
+const someGuitarData = mockGuitars[0];
+const someGuitarId = mockGuitars[0].vendorCode;
+
 const history = createMemoryHistory();
 const fakeApp = (
   <Provider store={store}>
@@ -54,5 +57,17 @@ describe('Application Routing', () => {
     expect(screen.getByText('404')).toBeInTheDocument();
     expect(screen.getByText('Извините страница не найдена')).toBeInTheDocument();
     expect(screen.getByText('Перейти на страницу каталога')).toBeInTheDocument();
+  });
+
+  it('should render "ProductPage" when user navigate to /products/:id route', () => {
+    const intersectionObserverMock = () => ({
+      observe: () => null,
+    });
+    window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverMock);
+    history.push(`/products/${someGuitarId}`);
+    render(fakeApp);
+    expect(screen.queryByText(/Загрузка/i)).not.toBeInTheDocument();
+    const title = screen.getByRole('heading', { level: 1 });
+    expect(title).toHaveTextContent(someGuitarData.name);
   });
 });
