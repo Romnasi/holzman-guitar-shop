@@ -5,7 +5,7 @@ export type ReviewData = {
   disadvantage: string;
   comment:string;
   rating: number;
-  createAt: Date,
+  createAt: string,
   guitarId: number;
 }
 
