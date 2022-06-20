@@ -63,6 +63,7 @@ function Reviews({ reviewsData }: ReviewsComponent): JSX.Element {
       <h3 className="reviews__title title title--bigger">Отзывы</h3>
       <button
         className="button button--red-border button--big reviews__sumbit-button"
+        data-testid="review-btn"
         onClick={() => setIsHiddenModalForm(false)}
       >
         Оставить отзыв
@@ -92,6 +93,7 @@ function Reviews({ reviewsData }: ReviewsComponent): JSX.Element {
       {
         !isHiddenShowButton &&
         <button
+          data-testid="show-more-reviews"
           className="button button--medium reviews__more-button"
           onClick={() => setReviewCount((prevState) => prevState + ReviewConfig.INCREMENT_STEP)}
         >

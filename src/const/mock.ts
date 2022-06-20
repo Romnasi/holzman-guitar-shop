@@ -65,4 +65,14 @@ export const mockComments = [
     createAt: '2022-05-10T21:00:00.056Z',
     guitarId: 1,
   },
+  {
+    id: 'c6621ded-aec0-4d39-b791-d1e18a341f8cerer',
+    userName: 'Ольга',
+    advantage: 'Цена=качество.',
+    disadvantage: 'Разбитая гитара. Плохая упаковка.',
+    comment: 'Неплохо, но дорого.',
+    rating: 5,
+    createAt: '2022-05-10T21:00:00.056Z',
+    guitarId: 1,
+  },
 ];
