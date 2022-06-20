@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { ModalComponent } from '../../types/modal';
 import { Key } from '../../const/modal';
 
-function Modal({ children, isHiddenModal, modalClass, handleModalClose }: ModalComponent): JSX.Element {
+function Modal({ children, isHiddenModal, modalClass = '', handleModalClose }: ModalComponent): JSX.Element {
   const basicModalClass = `modal ${modalClass}`;
   const curModalClass = isHiddenModal ? basicModalClass : `${basicModalClass} is-active`;
   const ref = useRef<HTMLDivElement>(null);
@@ -15,7 +15,7 @@ function Modal({ children, isHiddenModal, modalClass, handleModalClose }: ModalC
     };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  },[]);
+  },[handleModalClose]);
 
   useEffect(() => {
     if (!isHiddenModal)  {

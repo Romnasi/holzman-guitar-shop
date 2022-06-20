@@ -17,3 +17,8 @@ export const navData = [
     path: AppRoute.NOT_FOUND,
   },
 ];
+
+export const enum LogoType {
+  HEADER = 'HEADER',
+  FOOTER = 'FOOTER',
+}

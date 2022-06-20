@@ -5,7 +5,7 @@ import ProductRate from '../product-rate/product-rate';
 
 function Review({ userName, advantage, disadvantage, comment, createAt, rating }: ReviewData): JSX.Element {
   return(
-    <div className="review">
+    <article className="review">
       <div className="review__wrapper">
         <h4 className="review__title review__title--author title title--lesser">
           {userName}
@@ -23,7 +23,7 @@ function Review({ userName, advantage, disadvantage, comment, createAt, rating }
 
       <h4 className="review__title title title--lesser">Комментарий:</h4>
       <p className="review__value">{comment}</p>
-    </div>
+    </article>
   );
 }
 
