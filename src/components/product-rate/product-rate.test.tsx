@@ -35,21 +35,4 @@ describe('Component: ProductRate', () => {
     expect(evaluationText).toBeInTheDocument();
     expect(screen.getByText(/Всего оценок/i)).toBeInTheDocument();
   });
-
-  it('should render correctly, if cardType != "CATALOG" does not render "ReviewCounter"', () => {
-    render(
-      <Provider store={store}>
-        <Router history={history}>
-          <ProductRate
-            rating={testGuitarData.rating}
-            cardType={CardType.PRODUCT}
-            guitarId={testGuitarData.id}
-          />
-        </Router>
-      </ Provider>);
-
-    const evaluationText = screen.getByText(`Рейтинг: ${getEvaluation(testGuitarData.rating)}`);
-    expect(evaluationText).toBeInTheDocument();
-    expect(screen.queryByText(/Всего оценок/i)).not.toBeInTheDocument();
-  });
 });
