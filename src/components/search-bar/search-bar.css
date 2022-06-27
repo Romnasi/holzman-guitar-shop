@@ -1,0 +1,16 @@
+.form-search__link {
+  display: block;
+  font-size: 14px;
+  line-height: 19px;
+
+  color: inherit;
+
+  cursor: pointer;
+  -webkit-transition: color 0.3s ease;
+          transition: color 0.3s ease;
+}
+
+.form-search__link:hover,
+.form-search__link:focus {
+  color: #545454;
+}
