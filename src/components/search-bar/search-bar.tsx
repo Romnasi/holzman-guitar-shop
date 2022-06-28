@@ -2,25 +2,9 @@ import './search-bar.css';
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { getGuitars } from '../../store/catalog-data/selectors';
-import { GuitarsData } from '../../types/card-data';
+import { getSearchItems } from '../../utils/search-bar';
 import { Link } from 'react-router-dom';
-
-type SearchItem = {
-  name: string;
-  vendorCode: string;
-  id: number;
-}
-
-type SearchItems = SearchItem[];
-
-const getSearchItems = (guitars: GuitarsData, searchValue: string): SearchItems => guitars
-  .reduce((acc: SearchItems, { id, name, vendorCode }) => {
-    const curName = name.toLowerCase();
-    if (curName.indexOf(searchValue.toLowerCase()) + 1) {
-      acc.push({ id, name, vendorCode });
-    }
-    return acc;
-  }, []);
+import { SearchItems } from '../../types/search-bar';
 
 function SearchBar(): JSX.Element {
   const [searchItems, setSearchItems] = useState<SearchItems>([]);
