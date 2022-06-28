@@ -1,5 +1,5 @@
 import './search-bar.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { getGuitars } from '../../store/catalog-data/selectors';
 import { GuitarsData } from '../../types/card-data';
@@ -24,13 +24,31 @@ const getSearchItems = (guitars: GuitarsData, searchValue: string): SearchItems 
 
 function SearchBar(): JSX.Element {
   const [searchItems, setSearchItems] = useState<SearchItems>([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [isListHidden, setIsListHidden] = useState(true);
   const guitars = useSelector(getGuitars);
 
+  const listClass = 'form-search__select-list';
+  const listClassHidden = `${listClass} hidden`;
+
   useEffect(() => {
-    if (guitars.length) {
-      setSearchItems(getSearchItems(guitars, 'ч'));
+    if (guitars.length && searchValue) {
+      setSearchItems(getSearchItems(guitars, searchValue));
     }
-  }, [guitars]);
+  }, [guitars, searchValue]);
+
+  useEffect(() => {
+    if (searchItems.length && searchValue) {
+      setIsListHidden(false);
+    } else {
+      setIsListHidden(true);
+    }
+  }, [searchItems, searchValue]);
+
+  const handleOnSearchChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const target = evt.target as HTMLInputElement;
+    setSearchValue(target.value);
+  };
 
   return (
     <div className="form-search">
@@ -41,6 +59,7 @@ function SearchBar(): JSX.Element {
           </svg><span className="visually-hidden">Начать поиск</span>
         </button>
         <input
+          onChange={(evt: ChangeEvent<HTMLInputElement>) => handleOnSearchChange(evt)}
           className="form-search__input"
           id="search"
           type="text"
@@ -48,8 +67,9 @@ function SearchBar(): JSX.Element {
           placeholder="что вы ищите?"
         />
         <label className="visually-hidden" htmlFor="search">Поиск</label>
+
       </form>
-      <ul className="form-search__select-list">
+      <ul className={isListHidden ? listClassHidden : listClass }>
         {
           searchItems.map(({ id, name, vendorCode }) => (
             <li className="form-search__select-item" key={id} >
