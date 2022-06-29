@@ -29,6 +29,11 @@ export type CatalogSortType = {
   isActive: boolean;
 }
 
+export type SortStateUpdate = {
+  type?: SortName;
+  direction?: SortDirection;
+}
+
 export type CatalogData = {
   guitars: GuitarData[];
   comments: ReviewData[];
