@@ -1,4 +1,5 @@
 import { ReviewData } from './review';
+import { SortName, SortDirection } from '../const/sort';
 
 export type RateProps = {
   rating: number;
@@ -22,6 +23,12 @@ export type CurGuitar = GuitarData | null;
 
 export type GuitarsData = GuitarData[];
 
+export type CatalogSortType = {
+  type: SortName;
+  direction: SortDirection;
+  isActive: boolean;
+}
+
 export type CatalogData = {
   guitars: GuitarData[];
   comments: ReviewData[];
@@ -30,4 +37,5 @@ export type CatalogData = {
   curPagination: number;
   guitarNumber: number;
   curGuitar: GuitarData | null;
+  sortType: CatalogSortType;
 };

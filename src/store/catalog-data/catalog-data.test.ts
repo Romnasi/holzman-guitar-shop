@@ -2,6 +2,7 @@ import { catalogData } from './catalog-data';
 import { PaginationData } from '../../const/pagination';
 import { mockGuitars, mockComments } from '../../const/mock';
 import { addComment, addCurGuitar, changeCurPagination, loadComments, loadGuitars } from '../action';
+import { defaultSortType } from '../../const/sort';
 
 const initialState = {
   guitars: [],
@@ -11,6 +12,7 @@ const initialState = {
   curPagination: PaginationData.DEFAULT_ACTIVE_PAGE,
   guitarNumber: 0,
   curGuitar: null,
+  sortType: defaultSortType,
 };
 
 describe('Reducer: catalogData', () => {
@@ -29,6 +31,7 @@ describe('Reducer: catalogData', () => {
         curPagination: PaginationData.DEFAULT_ACTIVE_PAGE,
         guitarNumber: mockGuitars.length,
         curGuitar: null,
+        sortType: defaultSortType,
       });
   });
 
@@ -42,6 +45,7 @@ describe('Reducer: catalogData', () => {
         curPagination: PaginationData.DEFAULT_ACTIVE_PAGE,
         guitarNumber: 0,
         curGuitar: null,
+        sortType: defaultSortType,
       });
   });
 
@@ -56,6 +60,7 @@ describe('Reducer: catalogData', () => {
         curPagination: testPaginationNumber,
         guitarNumber: 0,
         curGuitar: null,
+        sortType: defaultSortType,
       });
   });
 
@@ -70,6 +75,7 @@ describe('Reducer: catalogData', () => {
         curPagination: PaginationData.DEFAULT_ACTIVE_PAGE,
         guitarNumber: 0,
         curGuitar: testCurGuitar,
+        sortType: defaultSortType,
       });
   });
 
@@ -84,6 +90,7 @@ describe('Reducer: catalogData', () => {
         curPagination: PaginationData.DEFAULT_ACTIVE_PAGE,
         guitarNumber: 0,
         curGuitar: null,
+        sortType: defaultSortType,
       });
   });
 });
