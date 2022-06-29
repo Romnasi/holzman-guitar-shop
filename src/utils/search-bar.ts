@@ -5,7 +5,7 @@ export const getSearchItems = (guitars: GuitarsData, searchValue: string): Searc
   .reduce((acc: SearchItems, { id, name, vendorCode }) => {
     const curName = name.toLowerCase();
     if (curName.indexOf(searchValue.toLowerCase()) + 1) {
-      acc.push({ id, name, vendorCode });
+      acc.push({ id, name, vendorCode, isLink: true });
     }
     return acc;
   }, []);

@@ -1,7 +1,7 @@
 import './search-bar.css';
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
-import { getGuitars } from '../../store/catalog-data/selectors';
+import { getGuitars, getLoadedDataStatus } from '../../store/catalog-data/selectors';
 import { getSearchItems } from '../../utils/search-bar';
 import { Link } from 'react-router-dom';
 import { SearchItems } from '../../types/search-bar';
@@ -10,16 +10,28 @@ function SearchBar(): JSX.Element {
   const [searchItems, setSearchItems] = useState<SearchItems>([]);
   const [searchValue, setSearchValue] = useState('');
   const [isListHidden, setIsListHidden] = useState(true);
+  const isDataLoaded = useSelector(getLoadedDataStatus);
   const guitars = useSelector(getGuitars);
 
   const listClass = 'form-search__select-list list-opened';
   const listClassHidden = 'form-search__select-list hidden';
 
   useEffect(() => {
-    if (guitars.length && searchValue) {
-      setSearchItems(getSearchItems(guitars, searchValue));
+    if (isDataLoaded && searchValue) {
+      const curSearchItems = getSearchItems(guitars, searchValue);
+
+      if (curSearchItems.length) {
+        setSearchItems(curSearchItems);
+      } else {
+        setSearchItems([{
+          name: 'Не найдено',
+          vendorCode: '',
+          id: 1,
+          isLink: false,
+        }]);
+      }
     }
-  }, [guitars, searchValue]);
+  }, [searchValue, isDataLoaded, guitars]);
 
   useEffect(() => {
     if (searchItems.length && searchValue) {
@@ -58,19 +70,29 @@ function SearchBar(): JSX.Element {
       </form>
       <ul className={isListHidden ? listClassHidden : listClass }>
         {
-          searchItems.map(({ id, name, vendorCode }) => (
-            <li className="form-search__select-item" key={id} >
-              <Link
-                className="form-search__link"
-                onClick={() => setSearchValue('')}
-                to={`/products/${vendorCode}`}
-              >
-                {name}
-              </Link>
-            </li>
-          ))
+          searchItems.map(({ id, name, vendorCode, isLink }) => {
+            if (!isLink) {
+              return (
+                <li className="form-search__item" key={id} >
+                  <span>{name}</span>
+                </li>
+              );
+            }
+            return (
+              <li className="form-search__select-item" key={id} >
+                <Link
+                  className="form-search__link"
+                  onClick={() => setSearchValue('')}
+                  to={`/products/${vendorCode}`}
+                >
+                  {name}
+                </Link>
+              </li>
+            );
+          })
         }
       </ul>
+
       <button
         onClick={() => setSearchValue('')}
         className="form-search__reset"
