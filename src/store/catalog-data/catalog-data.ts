@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { addComment, addCurGuitar, changeCurPagination, loadComments, loadGuitars } from '../action';
+import { addComment, addCurGuitar, changeCurPagination, changeSortType, loadComments, loadGuitars } from '../action';
 import { CatalogData } from '../../types/card-data';
 import { PaginationData } from '../../const/pagination';
 import { defaultSortType } from '../../const/sort';
@@ -43,6 +43,10 @@ const catalogData = createReducer(initialState, (builder) => {
       const {comment} = action.payload;
 
       state.comments = [...state.comments, comment];
+    }).addCase(changeSortType, (state, action) => {
+      const {sortType} = action.payload;
+
+      state.sortType = sortType;
     });
 });
 

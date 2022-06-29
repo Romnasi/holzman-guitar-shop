@@ -56,7 +56,7 @@ export const redirectToRoute = createAction(
   }),
 );
 
-export const changeFilterType = createAction(
+export const changeSortType = createAction(
   ActionType.ChangeSortType,
   (sortType: CatalogSortType) => ({
     payload: {

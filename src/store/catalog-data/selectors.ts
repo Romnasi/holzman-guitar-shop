@@ -1,6 +1,6 @@
 import { NameSpace } from '../../const/store';
 import { State } from '../../types/state';
-import { GuitarsData, CurGuitar } from '../../types/card-data';
+import { GuitarsData, CurGuitar, CatalogSortType } from '../../types/card-data';
 import { ReviewData } from '../../types/review';
 
 export const getGuitars = (state: State): GuitarsData => state[NameSpace.data].guitars;
@@ -10,3 +10,4 @@ export const getGuitarNumber = (state: State): number => state[NameSpace.data].g
 export const getCurPagination = (state: State): number => state[NameSpace.data].curPagination;
 export const getComments = (state: State): ReviewData[] => state[NameSpace.data].comments;
 export const getCurGuitar = (state: State): CurGuitar => state[NameSpace.data].curGuitar;
+export const getSortType = (state: State): CatalogSortType => state[NameSpace.data].sortType;
