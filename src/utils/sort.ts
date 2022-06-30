@@ -1,5 +1,5 @@
 import { SortName, SortDirection } from '../const/sort';
-import { CatalogSortType } from '../types/card-data';
+import { CatalogSortType, GuitarsData } from '../types/card-data';
 
 const getTypeButtonClass = (
   className: string,
@@ -41,5 +41,30 @@ export const getSortButtonClass = (buttonType: string, sortState: CatalogSortTyp
       return getOrderButtonClass(downOrderButtonClass, direction, isActive, SortDirection.DESCENDING);
     default:
       return '';
+  }
+};
+
+export const getSortedGuitars = (guitars: GuitarsData, sortType: CatalogSortType) => {
+  const { isActive, type, direction } = sortType;
+
+  if (!isActive) {
+    return guitars;
+  }
+
+  switch (type) {
+    case SortName.PRICE:
+      if (direction === SortDirection.ASCENDING) {
+        return guitars.slice().sort((a, b) => a.price - b.price);
+      }
+      return guitars.slice().sort((a, b) => b.price - a.price);
+
+    case SortName.COMMENT:
+      if (direction === SortDirection.ASCENDING) {
+        return guitars.slice().sort((a, b) => a.rating - b.rating);
+      }
+      return guitars.slice().sort((a, b) => b.rating - a.rating);
+
+    default:
+      return guitars;
   }
 };
