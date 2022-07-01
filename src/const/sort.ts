@@ -1,11 +1,16 @@
 export const enum SortDirection {
-  ASCENDING = 'ASCENDING',
-  DESCENDING = 'DESCENDING',
+  ASCENDING = 'ascending',
+  DESCENDING = 'descending',
 }
 
 export const enum SortName {
-  PRICE = 'PRICE',
-  COMMENT = 'COMMENT',
+  PRICE = 'price',
+  COMMENT = 'comment',
+}
+
+export const enum SortQueryKey {
+  TYPE = 'sort',
+  ORDER = 'order',
 }
 
 export const defaultSortType = {
