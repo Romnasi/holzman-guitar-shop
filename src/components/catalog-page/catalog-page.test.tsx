@@ -1,10 +1,11 @@
-import {render, screen} from '@testing-library/react';
-import {Router} from 'react-router-dom';
-import {createMemoryHistory} from 'history';
+import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import CatalogPage from './catalog-page';
-import {mockGuitars, mockComments} from '../../const/mock';
-import {configureMockStore} from '@jedmao/redux-mock-store';
-import {Provider} from 'react-redux';
+import { mockGuitars, mockComments } from '../../const/mock';
+import { configureMockStore } from '@jedmao/redux-mock-store';
+import { Provider } from 'react-redux';
+import { defaultSortType } from '../../const/sort';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
@@ -13,6 +14,7 @@ const storeWithoutData = mockStore({
   DATA: {
     isDataLoaded: false,
     isCommentsLoaded: false,
+    sortType: defaultSortType,
   },
 });
 
@@ -25,6 +27,7 @@ const storeWithData = mockStore({
     curPagination: 1,
     guitarNumber: 3,
     curGuitar: null,
+    sortType: defaultSortType,
   },
 });
 
