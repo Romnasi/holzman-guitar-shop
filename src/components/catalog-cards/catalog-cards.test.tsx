@@ -4,7 +4,8 @@ import CatalogCards from './catalog-cards';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import {createMemoryHistory} from 'history';
+import { createMemoryHistory } from 'history';
+import { defaultSortType } from '../../const/sort';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
@@ -20,6 +21,7 @@ const store = mockStore({
     curPagination: 1,
     guitarNumber: 3,
     curGuitar: null,
+    sortType: defaultSortType,
   },
 });
 

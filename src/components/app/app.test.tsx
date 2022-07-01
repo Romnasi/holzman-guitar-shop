@@ -6,6 +6,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import { AppRoute } from '../../const/app-route';
 import App from './app';
 import { mockGuitars, mockComments } from '../../const/mock';
+import { defaultSortType } from '../../const/sort';
 
 const mockStore = configureMockStore();
 
@@ -18,6 +19,7 @@ const store = mockStore({
     curPagination: 1,
     guitarNumber: 3,
     curGuitar: null,
+    sortType: defaultSortType,
   },
 });
 

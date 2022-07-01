@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
 import { AppRoute } from '../const/app-route';
-import { GuitarData } from '../types/card-data';
+import { CatalogSortType, GuitarData } from '../types/card-data';
 import { ReviewData } from '../types/review';
 
 export const loadGuitars = createAction(
@@ -53,5 +53,14 @@ export const redirectToRoute = createAction(
   ActionType.RedirectToRoute,
   (url: AppRoute | string) => ({
     payload: url,
+  }),
+);
+
+export const changeSortType = createAction(
+  ActionType.ChangeSortType,
+  (sortType: CatalogSortType) => ({
+    payload: {
+      sortType,
+    },
   }),
 );

@@ -11,12 +11,14 @@ function Pagination(): JSX.Element {
   const itemNumber = useSelector(getGuitarNumber);
   const activePage = useSelector(getCurPagination);
   const dispatch = useDispatch();
-  const { hash } = useLocation();
+  const { hash, search } = useLocation();
 
   const lastPage = Math.ceil(itemNumber / PaginationData.CARD_PER_PAGE);
   const pageNumbers = getPageNumbers(lastPage);
   const isFirstPage = activePage === PaginationData.FIRST_PAGE;
   const isLastPage = activePage === lastPage;
+
+  const getPaginationPath = (hashPath: string) => search ? `${search}${hashPath}` : hashPath;
 
   useEffect(() => {
     if (!hash) {
@@ -46,7 +48,7 @@ function Pagination(): JSX.Element {
           <li className="pagination__page pagination__page--prev" id="next">
             <Link
               className="link pagination__page-link"
-              to={`#page_${getPrevPage(activePage)}`}
+              to={getPaginationPath(`#page_${getPrevPage(activePage)}`)}
             >
               Назад
             </Link>
@@ -62,7 +64,7 @@ function Pagination(): JSX.Element {
               <Link
                 className="link pagination__page-link"
                 onClick={() => dispatch(changeCurPagination(pageNumber))}
-                to={`#page_${pageNumber}`}
+                to={getPaginationPath(`#page_${pageNumber}`)}
               >
                 {pageNumber}
               </Link>
@@ -75,7 +77,7 @@ function Pagination(): JSX.Element {
           <li className="pagination__page pagination__page--next" id="next">
             <Link
               className="link pagination__page-link"
-              to={`#page_${getNextPage(activePage)}`}
+              to={getPaginationPath(`#page_${getNextPage(activePage)}`)}
             >
               Далее
             </Link>

@@ -14,6 +14,7 @@ export enum ActionType {
   AddComment = 'data/addComments',
   ChangeCurPagination = 'data/changeCurPagination',
   AddCurGuitar = 'data/addCurGuitar',
+  ChangeSortType = 'data/changeSortType',
   RedirectToRoute = 'ui/redirectToRoute',
 }
 
