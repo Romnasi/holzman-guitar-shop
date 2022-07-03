@@ -1,48 +1,18 @@
+
 import { useSelector } from 'react-redux';
 import { getGuitars } from '../../store/catalog-data/selectors';
-import { GuitarsData } from '../../types/card-data';
-import { formatter } from '../../utils/catalog-product';
-
-const getMinMaxPrice = (guitars: GuitarsData) => {
-  const prices = guitars.map(({price}) => price);
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
-  return [min, max];
-};
-
+import FilterPrice from '../filter-price/filter-price';
 
 function CatalogFilter(): JSX.Element {
   const guitars = useSelector(getGuitars);
-  const [min, max] = getMinMaxPrice(guitars);
 
   return (
     <form className="catalog-filter">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
 
-      <fieldset className="catalog-filter__block">
-        <legend className="catalog-filter__block-title">Цена, ₽</legend>
-        <div className="catalog-filter__price-range">
-          <div className="form-input">
-            <label className="visually-hidden">Минимальная цена</label>
-            <input
-              type="number"
-              placeholder={formatter.format(min)}
-              id="priceMin"
-              name="priceMin"
-              min={0}
-            />
-          </div>
-          <div className="form-input">
-            <label className="visually-hidden">Максимальная цена</label>
-            <input
-              type="number"
-              placeholder={formatter.format(max)}
-              id="priceMax"
-              name="priceMax"
-            />
-          </div>
-        </div>
-      </fieldset>
+      <FilterPrice
+        guitars={guitars}
+      />
 
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Тип гитар</legend>
@@ -59,6 +29,7 @@ function CatalogFilter(): JSX.Element {
           <label htmlFor="ukulele">Укулеле</label>
         </div>
       </fieldset>
+
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Количество струн</legend>
         <div className="form-checkbox catalog-filter__block-item">
@@ -78,6 +49,7 @@ function CatalogFilter(): JSX.Element {
           <label htmlFor="12-strings">12</label>
         </div>
       </fieldset>
+
       <button
         className="catalog-filter__reset-btn button button--black-border button--medium"
         type="reset"
