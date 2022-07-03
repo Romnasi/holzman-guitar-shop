@@ -21,7 +21,8 @@ function ProductCard({ name, previewImg, price, type, rating, vendorCode, id }: 
         />
 
         <p className="product-card__title">{name} {type}</p>
-        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{formatter.format(price)} ₽
+        <p className="product-card__price">
+          <span className="visually-hidden">Цена:</span>{formatter.format(price)} ₽
         </p>
       </div>
       <div className="product-card__buttons">
