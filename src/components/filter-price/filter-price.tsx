@@ -1,33 +1,46 @@
-import { useState } from 'react';
-import { FilterPriceComponent, PriceState } from '../../types/filter';
+import { useState, useEffect } from 'react';
+import { FilterPriceComponent } from '../../types/filter';
 import { formatter } from '../../utils/catalog-product';
 import { getMinMaxPrice } from '../../utils/filter';
-import { PriceControl } from '../../const/filter';
+import { PriceControl, FilterQueryKey } from '../../const/filter';
 
-function FilterPrice({ guitars }: FilterPriceComponent): JSX.Element {
+function FilterPrice({ guitars, setFilterQuery }: FilterPriceComponent): JSX.Element {
   const [min, max] = getMinMaxPrice(guitars);
-  const [price, setPrice] = useState<PriceState>({ min: undefined, max: undefined });
+  const [priceMin, setPriceMin] = useState<string | number>('');
+  const [priceMax, setPriceMax] = useState<string | number>('');
 
   const setMinPrice = (value: number) => {
-    setPrice((prev) => ({...prev, min: value }));
+    setPriceMin(value);
     setTimeout(() => {
       if (value < min) {
-        setPrice((prev) => ({...prev, min }));
+        setPriceMin(min);
       }
     }, 2000);
   };
 
   const setMaxPrice = (value: number) => {
-    setPrice((prev) => ({...prev, max: value }));
+    setPriceMax(value);
     setTimeout(() => {
       if (value > max) {
-        setPrice((prev) => ({...prev, max }));
+        setPriceMax(max);
       }
-      if (price.min && value < price.min) {
-        setPrice((prev) => ({...prev, max: price.min }));
+      if (priceMin && value < priceMin) {
+        setPriceMax(priceMin);
       }
     }, 2000);
   };
+
+  useEffect(() => {
+    if (priceMin) {
+      setFilterQuery(FilterQueryKey.PRICE_MIN, priceMin);
+    }
+  }, [priceMin]);
+
+  useEffect(() => {
+    if (priceMax) {
+      setFilterQuery(FilterQueryKey.PRICE_MAX, priceMax);
+    }
+  }, [priceMax]);
 
   const handlePriceChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const input = evt.target as HTMLInputElement;
@@ -57,7 +70,7 @@ function FilterPrice({ guitars }: FilterPriceComponent): JSX.Element {
             placeholder={formatter.format(min)}
             id={PriceControl.MIN}
             name={PriceControl.MIN}
-            value={price.min}
+            value={priceMin}
             min={0}
             onChange={handlePriceChange}
           />
@@ -69,7 +82,7 @@ function FilterPrice({ guitars }: FilterPriceComponent): JSX.Element {
             placeholder={formatter.format(max)}
             id={PriceControl.MAX}
             name={PriceControl.MAX}
-            value={price.max}
+            value={priceMax}
             min={0}
             onChange={handlePriceChange}
           />
