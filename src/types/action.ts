@@ -15,6 +15,7 @@ export enum ActionType {
   ChangeCurPagination = 'data/changeCurPagination',
   AddCurGuitar = 'data/addCurGuitar',
   ChangeSortType = 'data/changeSortType',
+  ChangePriceMin = 'filter/changePriceMin',
   RedirectToRoute = 'ui/redirectToRoute',
 }
 

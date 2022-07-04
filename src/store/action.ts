@@ -64,3 +64,12 @@ export const changeSortType = createAction(
     },
   }),
 );
+
+export const changePriceMin = createAction(
+  ActionType.ChangePriceMin,
+  (priceMin: number) => ({
+    payload: {
+      priceMin,
+    },
+  }),
+);
