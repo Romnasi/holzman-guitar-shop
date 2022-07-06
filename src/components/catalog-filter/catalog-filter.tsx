@@ -81,9 +81,13 @@ function CatalogFilter(): JSX.Element {
         handleFilterChange={handleFilterChangeDebounced}
       />
 
-      <FilterType />
+      <FilterType
+        handleFilterChange={handleFilterChange}
+      />
 
-      <FilterStrings />
+      <FilterStrings
+        handleFilterChange={handleFilterChange}
+      />
 
       <button
         className="catalog-filter__reset-btn button button--black-border button--medium"

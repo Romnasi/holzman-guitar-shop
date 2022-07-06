@@ -6,6 +6,13 @@ const initialState: FilterData = {
   priceMin: '',
   priceMax: '',
   isActive: false,
+  acoustic: false,
+  electric: false,
+  ukulele: false,
+  fourStrings: false,
+  sixStrings: false,
+  sevenStrings: false,
+  twelveStrings: false,
 };
 
 const filterData = createReducer(initialState, (builder) => {
