@@ -1,18 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { FilterPriceComponent } from '../../types/filter';
 import { formatter } from '../../utils/catalog-product';
 import { getMinMaxPrice } from '../../utils/filter';
 import { PriceControl, FilterQueryKey } from '../../const/filter';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPriceMin, getPriceMax } from '../../store/filter-data/selectors';
+import { changePriceMax, changePriceMin } from '../../store/action';
 
 function FilterPrice({ guitars, handleFilterChange }: FilterPriceComponent): JSX.Element {
   const [min, max] = getMinMaxPrice(guitars);
-  const [priceMin, setPriceMin] = useState<string | number>('');
-  const [priceMax, setPriceMax] = useState<string | number>('');
+  const dispatch = useDispatch();
+  const priceMin = useSelector(getPriceMin);
+  const priceMax = useSelector(getPriceMax);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if ((priceMin || priceMin === 0) && priceMin < min) {
-        setPriceMin(min);
+        dispatch(changePriceMin(min));
       }
     }, 2000);
 
@@ -21,11 +25,14 @@ function FilterPrice({ guitars, handleFilterChange }: FilterPriceComponent): JSX
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
+      if ((priceMin || priceMin === 0) && priceMax < min) {
+        dispatch(changePriceMax(min));
+      }
       if (priceMax > max) {
-        setPriceMax(max);
+        dispatch(changePriceMax(max));
       }
       if (priceMin && priceMax < priceMin) {
-        setPriceMax(priceMin);
+        dispatch(changePriceMax(Number(priceMin)));
       }
     }, 2000);
 
@@ -51,10 +58,10 @@ function FilterPrice({ guitars, handleFilterChange }: FilterPriceComponent): JSX
 
     switch (id) {
       case PriceControl.MIN:
-        setPriceMin(value);
+        dispatch(changePriceMin(value));
         break;
       case PriceControl.MAX:
-        setPriceMax(value);
+        dispatch(changePriceMax(value));
         break;
       default:
         break;

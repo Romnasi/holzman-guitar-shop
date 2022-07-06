@@ -4,11 +4,10 @@ import FilterPrice from '../filter-price/filter-price';
 import FilterType from '../../filter-type/filter-type';
 import FilterStrings from '../filter-strings/filter-strings';
 import { useLocation, useHistory } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useMemo, useEffect, useCallback } from 'react';
 import { FilterQueryKey } from '../../const/filter';
 import { changeFilterStatus, changePriceMax, changePriceMin } from '../../store/action';
 import { debounce } from 'lodash';
-
 
 function CatalogFilter(): JSX.Element {
   const guitars = useSelector(getGuitars);
@@ -17,7 +16,7 @@ function CatalogFilter(): JSX.Element {
   const { search } = useLocation();
   const searchParams = useMemo(() => new URLSearchParams(search), [search]);
 
-  const handleFilterChange = debounce((key: FilterQueryKey, value: string | number) => {
+  const handleFilterChange = useCallback((key: FilterQueryKey, value: string | number) => {
     dispatch(changeFilterStatus(true));
 
     switch (key) {
@@ -32,7 +31,21 @@ function CatalogFilter(): JSX.Element {
     }
 
     setFilterQuery(key, value);
-  }, 1000);
+  }, []);
+
+  const handleFilterChangeDebounced = debounce(handleFilterChange, 1000);
+
+  useEffect(() => {
+    const priceMin = searchParams.get(FilterQueryKey.PRICE_MIN);
+    const priceMax = searchParams.get(FilterQueryKey.PRICE_MAX);
+
+    if (priceMin) {
+      handleFilterChange(FilterQueryKey.PRICE_MIN, priceMin);
+    }
+    if (priceMax) {
+      handleFilterChange(FilterQueryKey.PRICE_MAX, priceMax);
+    }
+  }, []);
 
   const updateQueryValue = (key: FilterQueryKey, value: string | number) => {
     searchParams.delete(key);
@@ -65,7 +78,7 @@ function CatalogFilter(): JSX.Element {
 
       <FilterPrice
         guitars={guitars}
-        handleFilterChange={handleFilterChange}
+        handleFilterChange={handleFilterChangeDebounced}
       />
 
       <FilterType />

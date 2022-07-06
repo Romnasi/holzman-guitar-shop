@@ -8,6 +8,7 @@ import { getFilterState } from '../../store/filter-data/selectors';
 import { FilterData } from '../../types/filter';
 import { GuitarsData } from '../../types/card-data';
 import { changeGuitarNumber } from '../../store/action';
+import { useEffect } from 'react';
 
 const getFilteredGuitars = (sortedGuitars: GuitarsData, filterState: FilterData) => {
   const { isActive, priceMin, priceMax } = filterState;
@@ -37,11 +38,14 @@ function CatalogCards(): JSX.Element {
 
   const sortedGuitars = getSortedGuitars(guitars, sortType);
   const filteredGuitars = getFilteredGuitars(sortedGuitars, filterState);
-  dispatch(changeGuitarNumber(filteredGuitars.length));
 
   const startIndex = PaginationData.CARD_PER_PAGE * (curPagination - 1);
   const endIndex = PaginationData.CARD_PER_PAGE * curPagination;
   const curGuitars = filteredGuitars.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    dispatch(changeGuitarNumber(filteredGuitars.length));
+  }, [filteredGuitars, dispatch]);
 
   return (
     <ul className="cards catalog__cards">
