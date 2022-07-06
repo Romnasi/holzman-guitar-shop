@@ -1,27 +1,38 @@
-
-import { useSelector } from 'react-redux';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getGuitars } from '../../store/catalog-data/selectors';
 import FilterPrice from '../filter-price/filter-price';
 import FilterType from '../../filter-type/filter-type';
 import FilterStrings from '../filter-strings/filter-strings';
 import { useLocation, useHistory } from 'react-router-dom';
-// import { useMemo, useEffect, useCallback } from 'react';
 import { useMemo } from 'react';
 import { FilterQueryKey } from '../../const/filter';
+import { changeFilterStatus, changePriceMax, changePriceMin } from '../../store/action';
+import { debounce } from 'lodash';
 
 
 function CatalogFilter(): JSX.Element {
   const guitars = useSelector(getGuitars);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
   const { search } = useLocation();
   const searchParams = useMemo(() => new URLSearchParams(search), [search]);
 
-  // const handleFilterChange = useCallback((update: SortStateUpdate) => {
-  //   const sortState = {...sortType, ...update, isActive: true};
-  //   dispatch(changeSortType(sortState));
-  // }, []);
+  const handleFilterChange = debounce((key: FilterQueryKey, value: string | number) => {
+    dispatch(changeFilterStatus(true));
+
+    switch (key) {
+      case FilterQueryKey.PRICE_MIN:
+        dispatch(changePriceMin(Number(value)));
+        break;
+      case FilterQueryKey.PRICE_MAX:
+        dispatch(changePriceMax(Number(value)));
+        break;
+      default:
+        break;
+    }
+
+    setFilterQuery(key, value);
+  }, 1000);
 
   const updateQueryValue = (key: FilterQueryKey, value: string | number) => {
     searchParams.delete(key);
@@ -54,7 +65,7 @@ function CatalogFilter(): JSX.Element {
 
       <FilterPrice
         guitars={guitars}
-        setFilterQuery={setFilterQuery}
+        handleFilterChange={handleFilterChange}
       />
 
       <FilterType />
