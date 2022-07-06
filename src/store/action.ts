@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
 import { AppRoute } from '../const/app-route';
-import { CatalogSortType, GuitarData } from '../types/card-data';
+import { CatalogSortType, GuitarData, GuitarsData } from '../types/card-data';
 import { ReviewData } from '../types/review';
 
 export const loadGuitars = createAction(
@@ -70,6 +70,42 @@ export const changePriceMin = createAction(
   (priceMin: number) => ({
     payload: {
       priceMin,
+    },
+  }),
+);
+
+export const changeGuitarNumber = createAction(
+  ActionType.ChangeGuitarNumber,
+  (guitarNumber: number) => ({
+    payload: {
+      guitarNumber,
+    },
+  }),
+);
+
+export const changePriceMax = createAction(
+  ActionType.ChangePriceMax,
+  (priceMax: number) => ({
+    payload: {
+      priceMax,
+    },
+  }),
+);
+
+export const changeFilterStatus = createAction(
+  ActionType.ChangeFilterStatus,
+  (isActive: boolean) => ({
+    payload: {
+      isActive,
+    },
+  }),
+);
+
+export const addFilteredData = createAction(
+  ActionType.AddFilteredData,
+  (filteredData: GuitarsData) => ({
+    payload: {
+      filteredData,
     },
   }),
 );
