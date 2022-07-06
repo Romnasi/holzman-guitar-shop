@@ -4,41 +4,43 @@ import { formatter } from '../../utils/catalog-product';
 import { getMinMaxPrice } from '../../utils/filter';
 import { PriceControl, FilterQueryKey } from '../../const/filter';
 
-function FilterPrice({ guitars, setFilterQuery }: FilterPriceComponent): JSX.Element {
+function FilterPrice({ guitars, handleFilterChange }: FilterPriceComponent): JSX.Element {
   const [min, max] = getMinMaxPrice(guitars);
   const [priceMin, setPriceMin] = useState<string | number>('');
   const [priceMax, setPriceMax] = useState<string | number>('');
 
-  const setMinPrice = (value: number) => {
-    setPriceMin(value);
-    setTimeout(() => {
-      if (value < min) {
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if ((priceMin || priceMin === 0) && priceMin < min) {
         setPriceMin(min);
       }
     }, 2000);
-  };
 
-  const setMaxPrice = (value: number) => {
-    setPriceMax(value);
-    setTimeout(() => {
-      if (value > max) {
+    return () => clearTimeout(delayDebounceFn);
+  }, [priceMin]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (priceMax > max) {
         setPriceMax(max);
       }
-      if (priceMin && value < priceMin) {
+      if (priceMin && priceMax < priceMin) {
         setPriceMax(priceMin);
       }
     }, 2000);
-  };
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [priceMax]);
 
   useEffect(() => {
-    if (priceMin) {
-      setFilterQuery(FilterQueryKey.PRICE_MIN, priceMin);
+    if (priceMin && priceMin >= min) {
+      handleFilterChange(FilterQueryKey.PRICE_MIN, priceMin);
     }
   }, [priceMin]);
 
   useEffect(() => {
-    if (priceMax) {
-      setFilterQuery(FilterQueryKey.PRICE_MAX, priceMax);
+    if (priceMax && priceMax <= max && priceMax >= min) {
+      handleFilterChange(FilterQueryKey.PRICE_MAX, priceMax);
     }
   }, [priceMax]);
 
@@ -49,10 +51,10 @@ function FilterPrice({ guitars, setFilterQuery }: FilterPriceComponent): JSX.Ele
 
     switch (id) {
       case PriceControl.MIN:
-        setMinPrice(value);
+        setPriceMin(value);
         break;
       case PriceControl.MAX:
-        setMaxPrice(value);
+        setPriceMax(value);
         break;
       default:
         break;
