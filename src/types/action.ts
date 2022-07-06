@@ -20,6 +20,8 @@ export enum ActionType {
   ChangePriceMax = 'filter/changePriceMax',
   ChangeFilterStatus = 'filter/changeFilterStatus',
   AddFilteredData = 'filter/addFilteredData',
+  ChangeFilterType = 'filter/changeFilterType',
+  ChangeFilterStrings = 'filter/changeFilterStrings',
   RedirectToRoute = 'ui/redirectToRoute',
 }
 

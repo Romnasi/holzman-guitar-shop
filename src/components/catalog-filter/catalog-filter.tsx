@@ -6,18 +6,22 @@ import FilterStrings from '../filter-strings/filter-strings';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useMemo, useEffect, useCallback } from 'react';
 import { FilterQueryKey } from '../../const/filter';
-import { changeFilterStatus, changePriceMax, changePriceMin } from '../../store/action';
+import { changeFilterStatus, changePriceMax, changePriceMin, changeFilterType } from '../../store/action';
 import { debounce } from 'lodash';
+import { getFilterState } from '../../store/filter-data/selectors';
 
 function CatalogFilter(): JSX.Element {
   const guitars = useSelector(getGuitars);
+  const filterState = useSelector(getFilterState);
   const dispatch = useDispatch();
   const history = useHistory();
   const { search } = useLocation();
   const searchParams = useMemo(() => new URLSearchParams(search), [search]);
 
-  const handleFilterChange = useCallback((key: FilterQueryKey, value: string | number) => {
-    dispatch(changeFilterStatus(true));
+  const handleFilterChange = useCallback((key: FilterQueryKey, value: string | number | boolean) => {
+    if (!filterState.isActive) {
+      dispatch(changeFilterStatus(true));
+    }
 
     switch (key) {
       case FilterQueryKey.PRICE_MIN:
@@ -25,6 +29,11 @@ function CatalogFilter(): JSX.Element {
         break;
       case FilterQueryKey.PRICE_MAX:
         dispatch(changePriceMax(Number(value)));
+        break;
+      case FilterQueryKey.ACOUSTIC:
+      case FilterQueryKey.ELECTRIC:
+      case FilterQueryKey.UKULELE:
+        dispatch(changeFilterType({ [key]: value}));
         break;
       default:
         break;
@@ -47,19 +56,19 @@ function CatalogFilter(): JSX.Element {
     }
   }, []);
 
-  const updateQueryValue = (key: FilterQueryKey, value: string | number) => {
+  const updateQueryValue = (key: FilterQueryKey, value: string | number | boolean) => {
     searchParams.delete(key);
     searchParams.append(key, value.toString());
     history.push(`?${searchParams.toString()}`);
   };
 
-  const addNewQuery = (key: FilterQueryKey, value: string | number) => {
+  const addNewQuery = (key: FilterQueryKey, value: string | number | boolean) => {
     history.push(`?${searchParams.toString()}&${key}=${value}`);
   };
 
-  const createQuery = (key: FilterQueryKey, value: string | number) => history.push(`?${key}=${value}`);
+  const createQuery = (key: FilterQueryKey, value: string | number | boolean) => history.push(`?${key}=${value}`);
 
-  const setFilterQuery = (key: FilterQueryKey, value: string | number): void => {
+  const setFilterQuery = (key: FilterQueryKey, value: string | number | boolean): void => {
     if (search) {
       const prevValue = searchParams.get(key);
       if (prevValue) {

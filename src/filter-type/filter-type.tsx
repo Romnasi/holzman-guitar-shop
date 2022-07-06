@@ -1,11 +1,19 @@
 import { FilterTypeComponent } from '../types/filter';
 import { useSelector } from 'react-redux';
-import { getAcousticStatus, getElectricStatus, getUkuleleStatus } from '../store/filter-data/selectors';
+// import { useSelector, useDispatch } from 'react-redux';
+import { getGuitarTypeState } from '../store/filter-data/selectors';
+// import { changeFilterType } from '../store/action';
+import { FilterQueryKey } from '../const/filter';
+
 
 function FilterType({ handleFilterChange }: FilterTypeComponent): JSX.Element {
-  const isCheckedAcoustic = useSelector(getAcousticStatus);
-  const isCheckedElectric = useSelector(getElectricStatus);
-  const isCheckedUkulele = useSelector(getUkuleleStatus);
+  const guitarTypeState = useSelector(getGuitarTypeState);
+  // const dispatch = useDispatch();
+
+  const handleTypeFilterChange = (key: FilterQueryKey, value: boolean) => {
+    // dispatch(changeFilterType({ [key]: !curValue}));
+    handleFilterChange(key, !value);
+  };
 
   return (
     <fieldset className="catalog-filter__block">
@@ -16,7 +24,8 @@ function FilterType({ handleFilterChange }: FilterTypeComponent): JSX.Element {
           type="checkbox"
           id="acoustic"
           name="acoustic"
-          checked={isCheckedAcoustic}
+          checked={guitarTypeState.acoustic}
+          onChange={() => handleTypeFilterChange(FilterQueryKey.ACOUSTIC, guitarTypeState.acoustic)}
         />
         <label htmlFor="acoustic">Акустические гитары</label>
       </div>
@@ -27,7 +36,8 @@ function FilterType({ handleFilterChange }: FilterTypeComponent): JSX.Element {
           type="checkbox"
           id="electric"
           name="electric"
-          checked={isCheckedElectric}
+          checked={guitarTypeState.electric}
+          onChange={() => handleTypeFilterChange(FilterQueryKey.ELECTRIC, guitarTypeState.electric)}
         />
         <label htmlFor="electric">Электрогитары</label>
       </div>
@@ -38,7 +48,8 @@ function FilterType({ handleFilterChange }: FilterTypeComponent): JSX.Element {
           type="checkbox"
           id="ukulele"
           name="ukulele"
-          checked={isCheckedUkulele}
+          checked={guitarTypeState.ukulele}
+          onChange={() => handleTypeFilterChange(FilterQueryKey.UKULELE, guitarTypeState.ukulele)}
         />
         <label htmlFor="ukulele">Укулеле</label>
       </div>

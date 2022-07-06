@@ -1,18 +1,22 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { FilterData } from '../../types/filter';
-import { changeFilterStatus, changePriceMax, changePriceMin } from '../action';
+import { changeFilterStatus, changeFilterStrings, changeFilterType, changePriceMax, changePriceMin } from '../action';
 
 const initialState: FilterData = {
   priceMin: '',
   priceMax: '',
   isActive: false,
-  acoustic: false,
-  electric: false,
-  ukulele: false,
-  fourStrings: false,
-  sixStrings: false,
-  sevenStrings: false,
-  twelveStrings: false,
+  guitarType: {
+    acoustic: false,
+    electric: false,
+    ukulele: false,
+  },
+  strings: {
+    fourStrings: false,
+    sixStrings: false,
+    sevenStrings: false,
+    twelveStrings: false,
+  },
 };
 
 const filterData = createReducer(initialState, (builder) => {
@@ -31,6 +35,16 @@ const filterData = createReducer(initialState, (builder) => {
       const {isActive} = action.payload;
 
       state.isActive = isActive;
+    })
+    .addCase(changeFilterType, (state, action) => {
+      const {update} = action.payload;
+
+      state.guitarType = {...state.guitarType, ...update};
+    })
+    .addCase(changeFilterStrings, (state, action) => {
+      const {update} = action.payload;
+
+      state.strings = {...state.strings, ...update};
     });
 });
 

@@ -6,4 +6,7 @@ export const enum PriceControl {
 export const enum FilterQueryKey {
   PRICE_MIN = 'min',
   PRICE_MAX = 'max',
+  ACOUSTIC = 'acoustic',
+  ELECTRIC = 'electric',
+  UKULELE = 'ukulele',
 }

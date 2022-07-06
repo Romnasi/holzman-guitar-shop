@@ -3,6 +3,7 @@ import { ActionType } from '../types/action';
 import { AppRoute } from '../const/app-route';
 import { CatalogSortType, GuitarData, GuitarsData } from '../types/card-data';
 import { ReviewData } from '../types/review';
+import { UpdateGuitarType, UpdateStrings } from '../types/filter';
 
 export const loadGuitars = createAction(
   ActionType.LoadGuitars,
@@ -106,6 +107,24 @@ export const addFilteredData = createAction(
   (filteredData: GuitarsData) => ({
     payload: {
       filteredData,
+    },
+  }),
+);
+
+export const changeFilterType = createAction(
+  ActionType.ChangeFilterType,
+  (update: UpdateGuitarType) => ({
+    payload: {
+      update,
+    },
+  }),
+);
+
+export const changeFilterStrings = createAction(
+  ActionType.ChangeFilterStrings,
+  (update: UpdateStrings) => ({
+    payload: {
+      update,
     },
   }),
 );
