@@ -13,8 +13,8 @@ function Pagination(): JSX.Element {
   const dispatch = useDispatch();
   const { hash, search } = useLocation();
 
-  const lastPage = Math.ceil(itemNumber / PaginationData.CARD_PER_PAGE);
-  const pageNumbers = getPageNumbers(lastPage);
+  const lastPage = itemNumber ? Math.ceil(itemNumber / PaginationData.CARD_PER_PAGE) : 0;
+  const pageNumbers = lastPage ? getPageNumbers(lastPage) : [1];
   const isFirstPage = activePage === PaginationData.FIRST_PAGE;
   const isLastPage = activePage === lastPage;
 
@@ -38,6 +38,10 @@ function Pagination(): JSX.Element {
       dispatch(redirectToRoute(`${AppRoute.CATALOG}#page_${PaginationData.DEFAULT_ACTIVE_PAGE}`));
     }
   }, [dispatch, hash, lastPage]);
+
+  if (itemNumber === 0) {
+    return (<ul className="pagination__list"></ul>);
+  }
 
   return (
     <div className="pagination page-content__pagination">
