@@ -9,5 +9,5 @@ export type FilterData = {
 
 export type FilterPriceComponent = {
   guitars: GuitarsData;
-  setFilterQuery: (key: FilterQueryKey, value: string | number) => void;
+  handleFilterChange: (key: FilterQueryKey, value: string | number) => void;
 }
