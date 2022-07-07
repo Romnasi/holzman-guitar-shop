@@ -49,3 +49,7 @@ export type FilterTypeComponent = {
 export type FilterStringsComponent = {
   handleFilterChange: HandleFilterChange;
 }
+
+export type FilterMap = {
+  [key: string]: boolean
+}

@@ -1,17 +1,12 @@
 import { FilterTypeComponent } from '../types/filter';
 import { useSelector } from 'react-redux';
-// import { useSelector, useDispatch } from 'react-redux';
 import { getGuitarTypeState } from '../store/filter-data/selectors';
-// import { changeFilterType } from '../store/action';
 import { FilterQueryKey } from '../const/filter';
-
 
 function FilterType({ handleFilterChange }: FilterTypeComponent): JSX.Element {
   const guitarTypeState = useSelector(getGuitarTypeState);
-  // const dispatch = useDispatch();
 
   const handleTypeFilterChange = (key: FilterQueryKey, value: boolean) => {
-    // dispatch(changeFilterType({ [key]: !curValue}));
     handleFilterChange(key, !value);
   };
 

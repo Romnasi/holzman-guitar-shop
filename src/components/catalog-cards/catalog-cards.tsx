@@ -1,33 +1,13 @@
 import './catalog-cards.css';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurPagination, getGuitars, getSortType } from '../../store/catalog-data/selectors';
 import ProductCard from '../product-card/product-card';
 import { PaginationData } from '../../const/pagination';
 import { getSortedGuitars } from '../../utils/sort';
 import { getFilterState } from '../../store/filter-data/selectors';
-import { FilterData } from '../../types/filter';
-import { GuitarsData } from '../../types/card-data';
 import { changeGuitarNumber } from '../../store/action';
-import { useEffect } from 'react';
-
-const getFilteredGuitars = (sortedGuitars: GuitarsData, filterState: FilterData) => {
-  const { isActive, priceMin, priceMax } = filterState;
-
-  if (!isActive) {
-    return sortedGuitars;
-  }
-  let filteredGuitars = sortedGuitars.slice();
-
-  if (priceMin !== '') {
-    filteredGuitars = filteredGuitars.filter(({price}) => price >= priceMin);
-  }
-
-  if (priceMax !== '') {
-    filteredGuitars = filteredGuitars.filter(({price}) => price <= priceMax);
-  }
-
-  return filteredGuitars;
-};
+import { getFilteredGuitars } from '../../utils/filter';
 
 function CatalogCards(): JSX.Element {
   const dispatch = useDispatch();

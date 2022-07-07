@@ -9,4 +9,8 @@ export const enum FilterQueryKey {
   ACOUSTIC = 'acoustic',
   ELECTRIC = 'electric',
   UKULELE = 'ukulele',
+  FOUR_STRINGS = 'fourStrings',
+  SIX_STRINGS = 'sixStrings',
+  SEVEN_STRINGS = 'sevenStrings',
+  TWELVE_STRINGS = 'twelveStrings',
 }
