@@ -22,6 +22,7 @@ export enum ActionType {
   AddFilteredData = 'filter/addFilteredData',
   ChangeFilterType = 'filter/changeFilterType',
   ChangeFilterStrings = 'filter/changeFilterStrings',
+  ResetFilterState = 'filter/resetFilterState',
   RedirectToRoute = 'ui/redirectToRoute',
 }
 

@@ -6,9 +6,10 @@ import FilterStrings from '../filter-strings/filter-strings';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useMemo, useEffect, useCallback } from 'react';
 import { FilterQueryKey } from '../../const/filter';
-import { changeFilterStatus, changePriceMax, changePriceMin, changeFilterType } from '../../store/action';
+import { changeFilterStatus, changePriceMax, changePriceMin, changeFilterType, resetFilterState } from '../../store/action';
 import { debounce } from 'lodash';
 import { getFilterState } from '../../store/filter-data/selectors';
+import { AppRoute } from '../../const/app-route';
 
 function CatalogFilter(): JSX.Element {
   const guitars = useSelector(getGuitars);
@@ -33,7 +34,7 @@ function CatalogFilter(): JSX.Element {
       case FilterQueryKey.ACOUSTIC:
       case FilterQueryKey.ELECTRIC:
       case FilterQueryKey.UKULELE:
-        dispatch(changeFilterType({ [key]: value}));
+        dispatch(changeFilterType({ [key]: value }));
         break;
       default:
         break;
@@ -81,6 +82,11 @@ function CatalogFilter(): JSX.Element {
     }
   };
 
+  const handleFilterReset = () => {
+    history.push(AppRoute.CATALOG);
+    dispatch(resetFilterState());
+  };
+
   return (
     <form className="catalog-filter">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
@@ -101,6 +107,7 @@ function CatalogFilter(): JSX.Element {
       <button
         className="catalog-filter__reset-btn button button--black-border button--medium"
         type="reset"
+        onClick={handleFilterReset}
       >
         Очистить
       </button>

@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { FilterData } from '../../types/filter';
-import { changeFilterStatus, changeFilterStrings, changeFilterType, changePriceMax, changePriceMin } from '../action';
+import { changeFilterStatus, changeFilterStrings, changeFilterType, changePriceMax, changePriceMin, resetFilterState } from '../action';
 
 const initialState: FilterData = {
   priceMin: '',
@@ -45,6 +45,13 @@ const filterData = createReducer(initialState, (builder) => {
       const {update} = action.payload;
 
       state.strings = {...state.strings, ...update};
+    })
+    .addCase(resetFilterState, (state) => {
+      state.priceMin = initialState.priceMin;
+      state.priceMax = initialState.priceMax;
+      state.isActive = initialState.isActive;
+      state.guitarType = initialState.guitarType;
+      state.strings = initialState.strings;
     });
 });
 

@@ -128,3 +128,5 @@ export const changeFilterStrings = createAction(
     },
   }),
 );
+
+export const resetFilterState = createAction(ActionType.ResetFilterState);
