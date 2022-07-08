@@ -15,6 +15,14 @@ export enum ActionType {
   ChangeCurPagination = 'data/changeCurPagination',
   AddCurGuitar = 'data/addCurGuitar',
   ChangeSortType = 'data/changeSortType',
+  ChangeGuitarNumber = 'data/changeGuitarNumber',
+  ChangePriceMin = 'filter/changePriceMin',
+  ChangePriceMax = 'filter/changePriceMax',
+  ChangeFilterStatus = 'filter/changeFilterStatus',
+  AddFilteredData = 'filter/addFilteredData',
+  ChangeFilterType = 'filter/changeFilterType',
+  ChangeFilterStrings = 'filter/changeFilterStrings',
+  ResetFilterState = 'filter/resetFilterState',
   RedirectToRoute = 'ui/redirectToRoute',
 }
 

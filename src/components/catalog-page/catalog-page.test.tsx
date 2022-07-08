@@ -29,6 +29,22 @@ const storeWithData = mockStore({
     curGuitar: null,
     sortType: defaultSortType,
   },
+  FILTER: {
+    priceMin: '',
+    priceMax: '',
+    isActive: false,
+    guitarType: {
+      acoustic: false,
+      electric: false,
+      ukulele: false,
+    },
+    strings: {
+      fourStrings: false,
+      sixStrings: false,
+      sevenStrings: false,
+      twelveStrings: false,
+    },
+  },
 });
 
 describe('Component: СatalogPage', () => {
