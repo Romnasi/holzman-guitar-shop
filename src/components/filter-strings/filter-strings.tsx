@@ -1,21 +1,18 @@
-import { FilterStringsComponent } from '../../types/filter';
-import { useSelector, useDispatch } from 'react-redux';
-import { getGuitarTypeState, getStringsState } from '../../store/filter-data/selectors';
-import { changeFilterStrings } from '../../store/action';
 import { useEffect, useState } from 'react';
-
-const getDefaultDisabledState = () => ({
-  fourStrings: false,
-  sixStrings: false,
-  sevenStrings: false,
-  twelveStrings: false,
-});
+import { useSelector } from 'react-redux';
+import { FilterStringsComponent } from '../../types/filter';
+import { getGuitarTypeState, getStringsState } from '../../store/filter-data/selectors';
+import { FilterQueryKey } from '../../const/filter';
+import { getDefaultDisabledState } from '../../utils/filter';
 
 function FilterStrings({ handleFilterChange }: FilterStringsComponent): JSX.Element {
   const stringsState = useSelector(getStringsState);
   const { acoustic, electric, ukulele } = useSelector(getGuitarTypeState);
   const [disabledState, setDisabledState] = useState(getDefaultDisabledState());
-  const dispatch = useDispatch();
+
+  const handleStringsFilterChange = (key: FilterQueryKey, value: boolean) => {
+    handleFilterChange(key, !value);
+  };
 
   useEffect(() => {
     if (acoustic || electric || ukulele) {
@@ -65,7 +62,7 @@ function FilterStrings({ handleFilterChange }: FilterStringsComponent): JSX.Elem
           name="4-strings"
           checked={stringsState.fourStrings}
           disabled={disabledState.fourStrings}
-          onChange={() => dispatch(changeFilterStrings({ fourStrings: !stringsState.fourStrings }))}
+          onChange={() => handleStringsFilterChange(FilterQueryKey.FOUR_STRINGS, stringsState.fourStrings)}
         />
         <label htmlFor="4-strings">4</label>
       </div>
@@ -78,7 +75,7 @@ function FilterStrings({ handleFilterChange }: FilterStringsComponent): JSX.Elem
           name="6-strings"
           checked={stringsState.sixStrings}
           disabled={disabledState.sixStrings}
-          onChange={() => dispatch(changeFilterStrings({ sixStrings: !stringsState.sixStrings }))}
+          onChange={() => handleStringsFilterChange(FilterQueryKey.SIX_STRINGS, stringsState.sixStrings)}
         />
         <label htmlFor="6-strings">6</label>
       </div>
@@ -91,7 +88,7 @@ function FilterStrings({ handleFilterChange }: FilterStringsComponent): JSX.Elem
           name="7-strings"
           checked={stringsState.sevenStrings}
           disabled={disabledState.sevenStrings}
-          onChange={() => dispatch(changeFilterStrings({ sevenStrings: !stringsState.sevenStrings }))}
+          onChange={() => handleStringsFilterChange(FilterQueryKey.SEVEN_STRINGS, stringsState.sevenStrings)}
         />
         <label htmlFor="7-strings">7</label>
       </div>
@@ -104,7 +101,7 @@ function FilterStrings({ handleFilterChange }: FilterStringsComponent): JSX.Elem
           name="12-strings"
           checked={stringsState.twelveStrings}
           disabled={disabledState.twelveStrings}
-          onChange={() => dispatch(changeFilterStrings({ twelveStrings: !stringsState.twelveStrings }))}
+          onChange={() => handleStringsFilterChange(FilterQueryKey.TWELVE_STRINGS, stringsState.twelveStrings)}
         />
         <label htmlFor="12-strings">12</label>
       </div>
