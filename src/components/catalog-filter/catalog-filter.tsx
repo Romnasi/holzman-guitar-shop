@@ -1,14 +1,15 @@
-import { useEffect, useCallback, useMemo } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGuitars } from '../../store/catalog-data/selectors';
 import FilterPrice from '../filter-price/filter-price';
 import FilterType from '../../filter-type/filter-type';
 import FilterStrings from '../filter-strings/filter-strings';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FilterQueryKey } from '../../const/filter';
 import { debounce } from 'lodash';
 import { getFilterState } from '../../store/filter-data/selectors';
 import { AppRoute } from '../../const/app-route';
+import useQuery from '../../hooks/use-query';
 import {
   changeFilterStatus,
   changePriceMax,
@@ -18,10 +19,6 @@ import {
   changeFilterStrings
 } from '../../store/action';
 
-function useQuery() {
-  const { search } = useLocation();
-  return useMemo(() => new URLSearchParams(search), [search]);
-}
 
 function CatalogFilter(): JSX.Element {
   const dispatch = useDispatch();
