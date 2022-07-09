@@ -102,7 +102,7 @@ describe('Component: SearchBar', () => {
     expect(getByText('Не найдено')).toBeInTheDocument();
   });
 
-  it('should render product name list with value', () => {
+  it('should render product name list with link', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
@@ -110,10 +110,13 @@ describe('Component: SearchBar', () => {
         </Router>
       </Provider>);
 
+    const someGuitar = mockGuitars[0];
+
     const input = screen.getByPlaceholderText('что вы ищите?') as HTMLInputElement;
-    fireEvent.change(input, {target: {value: 'Bass'}});
+    fireEvent.change(input, {target: {value: someGuitar.name}});
     const { queryByText, getByText } = within(screen.getByRole('listitem'));
     expect(queryByText('Не найдено')).not.toBeInTheDocument();
-    expect(getByText('Bass')).toBeInTheDocument();
+    expect(getByText(someGuitar.name)).toBeInTheDocument();
+    expect(screen.getByRole('link')).toHaveAttribute('href', `/products/${someGuitar.vendorCode}`);
   });
 });
