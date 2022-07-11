@@ -9,7 +9,8 @@ import { FilterQueryKey } from '../../const/filter';
 import { debounce } from 'lodash';
 import { getFilterState } from '../../store/filter-data/selectors';
 import { AppRoute } from '../../const/app-route';
-import useQuery from '../../hooks/use-query';
+import { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   changeFilterStatus,
   changePriceMax,
@@ -25,7 +26,8 @@ function CatalogFilter(): JSX.Element {
   const guitars = useSelector(getGuitars);
   const filterState = useSelector(getFilterState);
   const history = useHistory();
-  const searchParams = useQuery();
+  const { search, hash } = useLocation();
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
 
   const handleFilterChange = useCallback((key: FilterQueryKey, value: string | number | boolean) => {
     if (!filterState.isActive) {
@@ -121,9 +123,14 @@ function CatalogFilter(): JSX.Element {
 
     filtersData.forEach(([key, value]) => setQuery(key, value as string | number | boolean));
 
-    history.replace({
-      search: searchParams.toString(),
-    });
+    if (!hash) {
+      history.replace({search: searchParams.toString()});
+    } else {
+      history.replace({
+        search: searchParams.toString(),
+        hash,
+      });
+    }
   }, [filterState]);
 
   const handleFilterReset = () => {

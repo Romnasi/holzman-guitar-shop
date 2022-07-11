@@ -25,7 +25,7 @@ const getOrderButtonClass = (
 };
 
 export const getSortButtonClass = (buttonType: string, sortState: CatalogSortType) => {
-  const { type, direction, isActive} = sortState;
+  const { type, direction, isActive } = sortState;
   const typeButtonClass = 'catalog-sort__type-button';
   const upOrderButtonClass = 'catalog-sort__order-button catalog-sort__order-button--up';
   const downOrderButtonClass = 'catalog-sort__order-button catalog-sort__order-button--down';
