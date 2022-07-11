@@ -1,7 +1,7 @@
-import { FilterTypeComponent } from '../types/filter';
+import { FilterTypeComponent } from '../../types/filter';
 import { useSelector } from 'react-redux';
-import { getGuitarTypeState } from '../store/filter-data/selectors';
-import { FilterQueryKey } from '../const/filter';
+import { getGuitarTypeState } from '../../store/filter-data/selectors';
+import { FilterQueryKey } from '../../const/filter';
 
 function FilterType({ handleFilterChange }: FilterTypeComponent): JSX.Element {
   const guitarTypeState = useSelector(getGuitarTypeState);

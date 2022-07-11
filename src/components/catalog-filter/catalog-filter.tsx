@@ -2,7 +2,7 @@ import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGuitars } from '../../store/catalog-data/selectors';
 import FilterPrice from '../filter-price/filter-price';
-import FilterType from '../../filter-type/filter-type';
+import FilterType from '../filter-type/filter-type';
 import FilterStrings from '../filter-strings/filter-strings';
 import { useHistory } from 'react-router-dom';
 import { FilterQueryKey } from '../../const/filter';
