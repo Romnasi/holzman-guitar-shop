@@ -122,11 +122,7 @@ export const changeFilterType = createAction(
 
 export const changeFilterStrings = createAction(
   ActionType.ChangeFilterStrings,
-  (update: UpdateStrings) => ({
-    payload: {
-      update,
-    },
-  }),
+  (update: UpdateStrings) => ({ payload: { update } }),
 );
 
 export const resetFilterState = createAction(ActionType.ResetFilterState);

@@ -1,11 +1,11 @@
-import { render, screen, cleanup } from '@testing-library/react';
-import { Router } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import { Router, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import CatalogSort from './catalog-sort';
 import { mockComments } from '../../const/mock';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import { defaultSortType } from '../../const/sort';
+import FilterType from './filter-type';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
@@ -75,23 +75,26 @@ const store = mockStore({
   },
 });
 
+const handleFilterChange = jest.fn();
+
 const fakeApp = (
   <Provider store={store}>
     <Router history={history}>
-      <CatalogSort />
+      <Route exact path='/catalog'>
+        <FilterType
+          handleFilterChange={handleFilterChange}
+        />
+      </Route>
     </Router>
   </Provider>);
 
-afterEach(cleanup);
-
-describe('Component: CatalogSort', () => {
+describe('Component: FilterPrice', () => {
   it('should render correctly', () => {
+    history.push('/catalog');
     render(fakeApp);
-
-    expect(screen.getByText(/Сортировать/i)).toBeInTheDocument();
-    expect(screen.getByLabelText('по цене')).toBeInTheDocument();
-    expect(screen.getByLabelText('по популярности')).toBeInTheDocument();
-    expect(screen.getByLabelText('По возрастанию')).toBeInTheDocument();
-    expect(screen.getByLabelText('По убыванию')).toBeInTheDocument();
+    const stringsFilters = screen.getAllByRole('checkbox');
+    expect(stringsFilters[0]).toHaveAttribute('name', 'acoustic');
+    expect(stringsFilters[1]).toHaveAttribute('name', 'electric');
+    expect(stringsFilters[2]).toHaveAttribute('name', 'ukulele');
   });
 });

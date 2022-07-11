@@ -1,14 +1,16 @@
-import { useEffect, useCallback, useMemo } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGuitars } from '../../store/catalog-data/selectors';
 import FilterPrice from '../filter-price/filter-price';
-import FilterType from '../../filter-type/filter-type';
+import FilterType from '../filter-type/filter-type';
 import FilterStrings from '../filter-strings/filter-strings';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FilterQueryKey } from '../../const/filter';
 import { debounce } from 'lodash';
 import { getFilterState } from '../../store/filter-data/selectors';
 import { AppRoute } from '../../const/app-route';
+import { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   changeFilterStatus,
   changePriceMax,
@@ -18,17 +20,14 @@ import {
   changeFilterStrings
 } from '../../store/action';
 
-function useQuery() {
-  const { search } = useLocation();
-  return useMemo(() => new URLSearchParams(search), [search]);
-}
 
 function CatalogFilter(): JSX.Element {
   const dispatch = useDispatch();
   const guitars = useSelector(getGuitars);
   const filterState = useSelector(getFilterState);
   const history = useHistory();
-  const searchParams = useQuery();
+  const { search, hash } = useLocation();
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
 
   const handleFilterChange = useCallback((key: FilterQueryKey, value: string | number | boolean) => {
     if (!filterState.isActive) {
@@ -124,9 +123,14 @@ function CatalogFilter(): JSX.Element {
 
     filtersData.forEach(([key, value]) => setQuery(key, value as string | number | boolean));
 
-    history.replace({
-      search: searchParams.toString(),
-    });
+    if (!hash) {
+      history.replace({search: searchParams.toString()});
+    } else {
+      history.replace({
+        search: searchParams.toString(),
+        hash,
+      });
+    }
   }, [filterState]);
 
   const handleFilterReset = () => {

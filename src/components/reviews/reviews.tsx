@@ -4,7 +4,7 @@ import Review from '../review/review';
 import { ReviewsComponent } from '../../types/review';
 import { ReviewConfig } from '../../const/review';
 import { goToTop } from '../../utils/scroll';
-import useOnScreen from '../../hooks/useOnScreen';
+import useOnScreen from '../../hooks/use-on-screen';
 import Modal from '../modal/modal';
 import ReviewForm from '../review-form/review-form';
 import ReviewSuccess from '../review-success/review-success';

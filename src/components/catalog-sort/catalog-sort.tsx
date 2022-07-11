@@ -11,7 +11,7 @@ function CatalogSort(): JSX.Element {
   const sortType = useSelector(getSortType);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { search } = useLocation();
+  const { search, hash } = useLocation();
   const searchParams = useMemo(() => new URLSearchParams(search), [search]);
 
   const handleSortChange = useCallback((update: SortStateUpdate) => {
@@ -19,8 +19,37 @@ function CatalogSort(): JSX.Element {
     dispatch(changeSortType(sortState));
   }, []);
 
+  const setQuery = (key: string, value: boolean | string | number) => {
+    const hasQuery = searchParams.has(key);
+    if (hasQuery) {
+      if (!value) {
+        searchParams.delete(key);
+      } else if (typeof value !== 'boolean') {
+        searchParams.set(key, value.toString());
+      }
+    } else {
+      if (value) {
+        searchParams.append(key, value.toString());
+      }
+    }
+  };
+
   const setSortQuery = (sortName: SortName, sortOrder: SortDirection) => {
-    history.push(`?${SortQueryKey.TYPE}=${sortName}&${SortQueryKey.ORDER}=${sortOrder}`);
+    if(searchParams.toString()) {
+      setQuery(SortQueryKey.TYPE, sortName);
+      setQuery(SortQueryKey.ORDER, sortOrder);
+      if (!hash) {
+        history.replace({search: searchParams.toString()});
+      } else {
+        history.replace({
+          search: searchParams.toString(),
+          hash,
+        });
+      }
+    } else {
+      history.push(`?${SortQueryKey.TYPE}=${sortName}&${SortQueryKey.ORDER}=${sortOrder}`);
+    }
+    handleSortChange({type: sortName, direction: sortOrder });
   };
 
   useEffect(() => {
@@ -51,6 +80,7 @@ function CatalogSort(): JSX.Element {
         >
           по цене
         </button>
+
         <button
           onClick={() => setSortQuery(SortName.COMMENT, sortType.direction)}
           className={getSortButtonClass(SortName.COMMENT, sortType)}
@@ -67,6 +97,7 @@ function CatalogSort(): JSX.Element {
           aria-label="По возрастанию"
         >
         </button>
+
         <button
           onClick={() => setSortQuery(sortType.type, SortDirection.DESCENDING)}
           className={getSortButtonClass(SortDirection.DESCENDING, sortType)}
