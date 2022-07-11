@@ -15,8 +15,11 @@ function FilterPrice({ guitars, handleFilterChange }: FilterPriceComponent): JSX
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      if ((priceMin || priceMin === 0) && priceMin < min) {
-        dispatch(changePriceMin(min));
+      const hasValue = priceMin || priceMin === 0;
+      if (hasValue && priceMin < min) {
+        handleFilterChange(FilterQueryKey.PRICE_MIN, min);
+      } else if (hasValue && priceMin >= min) {
+        handleFilterChange(FilterQueryKey.PRICE_MIN, priceMin);
       }
     }, 2000);
 
@@ -25,30 +28,20 @@ function FilterPrice({ guitars, handleFilterChange }: FilterPriceComponent): JSX
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      if ((priceMin || priceMin === 0) && priceMax < min) {
-        dispatch(changePriceMax(min));
-      }
-      if (priceMax > max) {
-        dispatch(changePriceMax(max));
-      }
-      if (priceMin && priceMax < priceMin) {
-        dispatch(changePriceMax(Number(priceMin)));
+      const hasPriceMin = priceMin || priceMin === 0;
+      const hasPriceMax = priceMax || priceMax === 0;
+      if (hasPriceMin && hasPriceMax && priceMax < priceMin) {
+        handleFilterChange(FilterQueryKey.PRICE_MAX, priceMin);
+      } else if (hasPriceMin && hasPriceMax && priceMax < min) {
+        handleFilterChange(FilterQueryKey.PRICE_MAX, min);
+      } else if (hasPriceMax && priceMax > max) {
+        handleFilterChange(FilterQueryKey.PRICE_MAX, max);
+      } else if (hasPriceMax && priceMax <= max && priceMax >= min) {
+        handleFilterChange(FilterQueryKey.PRICE_MAX, priceMax);
       }
     }, 2000);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [priceMax]);
-
-  useEffect(() => {
-    if (priceMin && priceMin >= min) {
-      handleFilterChange(FilterQueryKey.PRICE_MIN, priceMin);
-    }
-  }, [priceMin]);
-
-  useEffect(() => {
-    if (priceMax && priceMax <= max && priceMax >= min) {
-      handleFilterChange(FilterQueryKey.PRICE_MAX, priceMax);
-    }
   }, [priceMax]);
 
   const handlePriceChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
