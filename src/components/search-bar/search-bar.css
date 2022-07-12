@@ -28,3 +28,7 @@
   -webkit-transition: color 0.3s ease;
           transition: color 0.3s ease;
 }
+
+.form-search__item--not-found {
+  cursor: default;
+}
