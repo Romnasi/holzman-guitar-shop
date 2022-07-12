@@ -3,7 +3,7 @@ import { ActionType } from '../types/action';
 import { AppRoute } from '../const/app-route';
 import { CatalogSortType, GuitarData } from '../types/card-data';
 import { ReviewData } from '../types/review';
-import { UpdateGuitarType, UpdateStrings } from '../types/filter';
+import { MinMax, UpdateGuitarType, UpdateStrings } from '../types/filter';
 
 export const loadGuitars = createAction(
   ActionType.LoadGuitars,
@@ -91,6 +91,11 @@ export const changePriceMax = createAction(
       priceMax,
     },
   }),
+);
+
+export const changeMinMax = createAction(
+  ActionType.ChangeMinMax,
+  (minMax: MinMax) => ({ payload: { minMax } }),
 );
 
 export const changeFilterStatus = createAction(

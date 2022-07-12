@@ -1,6 +1,5 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getGuitars } from '../../store/catalog-data/selectors';
 import FilterPrice from '../filter-price/filter-price';
 import FilterType from '../filter-type/filter-type';
 import FilterStrings from '../filter-strings/filter-strings';
@@ -23,7 +22,6 @@ import {
 
 function CatalogFilter(): JSX.Element {
   const dispatch = useDispatch();
-  const guitars = useSelector(getGuitars);
   const filterState = useSelector(getFilterState);
   const history = useHistory();
   const { search, hash } = useLocation();
@@ -143,7 +141,6 @@ function CatalogFilter(): JSX.Element {
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
 
       <FilterPrice
-        guitars={guitars}
         handleFilterChange={handleFilterChangeDebounced}
       />
 

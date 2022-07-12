@@ -6,8 +6,9 @@ import ProductCard from '../product-card/product-card';
 import { PaginationData } from '../../const/pagination';
 import { getSortedGuitars } from '../../utils/sort';
 import { getFilterState } from '../../store/filter-data/selectors';
-import { changeGuitarNumber } from '../../store/action';
+import { changeGuitarNumber, changeMinMax } from '../../store/action';
 import { getFilteredGuitars } from '../../utils/filter';
+import { getMinMaxPrice } from '../../utils/filter';
 
 function CatalogCards(): JSX.Element {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function CatalogCards(): JSX.Element {
 
   const sortedGuitars = getSortedGuitars(guitars, sortType);
   const filteredGuitars = getFilteredGuitars(sortedGuitars, filterState);
+  const [min, max] = getMinMaxPrice(filteredGuitars);
 
   const startIndex = PaginationData.CARD_PER_PAGE * (curPagination - 1);
   const endIndex = PaginationData.CARD_PER_PAGE * curPagination;
@@ -26,6 +28,10 @@ function CatalogCards(): JSX.Element {
   useEffect(() => {
     dispatch(changeGuitarNumber(filteredGuitars.length));
   }, [filteredGuitars, dispatch]);
+
+  useEffect(() => {
+    dispatch(changeMinMax([min, max]));
+  }, [min, max]);
 
   return (
     <ul className="cards catalog__cards">

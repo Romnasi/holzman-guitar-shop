@@ -18,6 +18,7 @@ export enum ActionType {
   ChangeGuitarNumber = 'data/changeGuitarNumber',
   ChangePriceMin = 'filter/changePriceMin',
   ChangePriceMax = 'filter/changePriceMax',
+  ChangeMinMax = 'filter/changeMinMax',
   ChangeFilterStatus = 'filter/changeFilterStatus',
   ChangeFilterType = 'filter/changeFilterType',
   ChangeFilterStrings = 'filter/changeFilterStrings',

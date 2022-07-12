@@ -2,7 +2,7 @@ import { GuitarsData } from '../types/card-data';
 import { GuitarType, Strings, FilterData, FilterMap } from '../types/filter';
 import { FilterQueryKey } from '../const/filter';
 
-export const getMinMaxPrice = (guitars: GuitarsData) => {
+export const getMinMaxPrice = (guitars: GuitarsData): number[] => {
   const prices = guitars.map(({price}) => price);
   const min = Math.min(...prices);
   const max = Math.max(...prices);
