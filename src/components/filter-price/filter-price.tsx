@@ -32,7 +32,7 @@ function FilterPrice({ guitars, handleFilterChange }: FilterPriceComponent): JSX
       const hasPriceMax = priceMax || priceMax === 0;
       if (hasPriceMin && hasPriceMax && priceMax < priceMin) {
         handleFilterChange(FilterQueryKey.PRICE_MAX, priceMin);
-      } else if (hasPriceMin && hasPriceMax && priceMax < min) {
+      } else if (hasPriceMax && priceMax < min) {
         handleFilterChange(FilterQueryKey.PRICE_MAX, min);
       } else if (hasPriceMax && priceMax > max) {
         handleFilterChange(FilterQueryKey.PRICE_MAX, max);
