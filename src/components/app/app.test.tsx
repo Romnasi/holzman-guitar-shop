@@ -24,6 +24,7 @@ const store = mockStore({
   FILTER: {
     priceMin: '',
     priceMax: '',
+    minMax: [0, 0],
     isActive: false,
     guitarType: {
       acoustic: false,
