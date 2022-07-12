@@ -19,7 +19,6 @@ export enum ActionType {
   ChangePriceMin = 'filter/changePriceMin',
   ChangePriceMax = 'filter/changePriceMax',
   ChangeFilterStatus = 'filter/changeFilterStatus',
-  AddFilteredData = 'filter/addFilteredData',
   ChangeFilterType = 'filter/changeFilterType',
   ChangeFilterStrings = 'filter/changeFilterStrings',
   ResetFilterState = 'filter/resetFilterState',

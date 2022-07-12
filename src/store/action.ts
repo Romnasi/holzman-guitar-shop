@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../types/action';
 import { AppRoute } from '../const/app-route';
-import { CatalogSortType, GuitarData, GuitarsData } from '../types/card-data';
+import { CatalogSortType, GuitarData } from '../types/card-data';
 import { ReviewData } from '../types/review';
 import { UpdateGuitarType, UpdateStrings } from '../types/filter';
 
@@ -98,15 +98,6 @@ export const changeFilterStatus = createAction(
   (isActive: boolean) => ({
     payload: {
       isActive,
-    },
-  }),
-);
-
-export const addFilteredData = createAction(
-  ActionType.AddFilteredData,
-  (filteredData: GuitarsData) => ({
-    payload: {
-      filteredData,
     },
   }),
 );
