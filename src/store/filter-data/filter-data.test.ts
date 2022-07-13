@@ -5,12 +5,14 @@ import {
   changeFilterStatus,
   changeFilterType,
   changeFilterStrings,
-  resetFilterState
+  resetFilterState,
+  changeMinMax
 } from '../action';
 
 const initialState = {
   priceMin: '',
   priceMax: '',
+  minMax: [0, 0],
   isActive: false,
   guitarType: {
     acoustic: false,
@@ -28,6 +30,7 @@ const initialState = {
 const changedState = {
   priceMin: 1700,
   priceMax: '',
+  minMax: [0, 0],
   isActive: false,
   guitarType: {
     acoustic: true,
@@ -54,6 +57,7 @@ describe('Reducer: filterData', () => {
       .toEqual({
         priceMin: 100,
         priceMax: '',
+        minMax: [0, 0],
         isActive: false,
         guitarType: {
           acoustic: false,
@@ -74,6 +78,28 @@ describe('Reducer: filterData', () => {
       .toEqual({
         priceMin: '',
         priceMax: 100,
+        minMax: [0, 0],
+        isActive: false,
+        guitarType: {
+          acoustic: false,
+          electric: false,
+          ukulele: false,
+        },
+        strings: {
+          fourStrings: false,
+          sixStrings: false,
+          sevenStrings: false,
+          twelveStrings: false,
+        },
+      });
+  });
+
+  it('should change minMax', () => {
+    expect(filterData(initialState, changeMinMax([100, 500])))
+      .toEqual({
+        priceMin: '',
+        priceMax: '',
+        minMax: [100, 500],
         isActive: false,
         guitarType: {
           acoustic: false,
@@ -94,6 +120,7 @@ describe('Reducer: filterData', () => {
       .toEqual({
         priceMin: '',
         priceMax: '',
+        minMax: [0, 0],
         isActive: true,
         guitarType: {
           acoustic: false,
@@ -114,6 +141,7 @@ describe('Reducer: filterData', () => {
       .toEqual({
         priceMin: '',
         priceMax: '',
+        minMax: [0, 0],
         isActive: false,
         guitarType: {
           acoustic: true,
@@ -134,6 +162,7 @@ describe('Reducer: filterData', () => {
       .toEqual({
         priceMin: '',
         priceMax: '',
+        minMax: [0, 0],
         isActive: false,
         guitarType: {
           acoustic: false,

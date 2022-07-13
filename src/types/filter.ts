@@ -1,4 +1,3 @@
-import { GuitarsData } from '../types/card-data';
 import { FilterQueryKey } from '../const/filter';
 
 export type GuitarType = {
@@ -27,9 +26,12 @@ export type UpdateStrings = {
   twelveStrings?: boolean;
 }
 
+export type MinMax = number[];
+
 export type FilterData = {
   priceMin: string | number;
   priceMax: string | number;
+  minMax: MinMax;
   isActive: boolean;
   guitarType: GuitarType;
   strings: Strings;
@@ -38,7 +40,6 @@ export type FilterData = {
 type HandleFilterChange = (key: FilterQueryKey, value: string | number | boolean) => void;
 
 export type FilterPriceComponent = {
-  guitars: GuitarsData;
   handleFilterChange: HandleFilterChange;
 }
 

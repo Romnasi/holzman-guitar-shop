@@ -1,5 +1,5 @@
 import './search-bar.css';
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { getGuitars, getLoadedDataStatus } from '../../store/catalog-data/selectors';
 import { getSearchItems } from '../../utils/search-bar';
@@ -15,6 +15,20 @@ function SearchBar(): JSX.Element {
 
   const listClass = 'form-search__select-list list-opened';
   const listClassHidden = 'form-search__select-list hidden';
+
+  useEffect(() => {
+    const handleClickOutside = (evt: Event) => {
+      const element = evt.target as HTMLElement;
+      const isClickInsideList = element.closest('.form-search__select-list');
+      const isClickInsideInput = element.closest('.form-search__form');
+      if (!isClickInsideList && !isClickInsideInput) {
+        setIsListHidden(true);
+      }
+    };
+    window.addEventListener('click', handleClickOutside);
+
+    return  () => window.removeEventListener('click', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     if (isDataLoaded && searchValue) {
@@ -46,6 +60,12 @@ function SearchBar(): JSX.Element {
     setSearchValue(target.value);
   };
 
+  const handleSearchFocus = () => {
+    if (searchValue) {
+      setIsListHidden(false);
+    }
+  };
+
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => evt.preventDefault();
 
   return (
@@ -58,6 +78,7 @@ function SearchBar(): JSX.Element {
         </button>
         <input
           onChange={handleSearchChange}
+          onFocus={handleSearchFocus}
           value={searchValue}
           className="form-search__input"
           id="search"
@@ -73,7 +94,7 @@ function SearchBar(): JSX.Element {
           searchItems.map(({ id, name, vendorCode, isLink }) => {
             if (!isLink) {
               return (
-                <li className="form-search__item" key={id} >
+                <li className="form-search__item form-search__item--not-found" key={id} >
                   <span>{name}</span>
                 </li>
               );

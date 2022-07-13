@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { FilterPriceComponent } from '../../types/filter';
 import { formatter } from '../../utils/catalog-product';
-import { getMinMaxPrice } from '../../utils/filter';
 import { PriceControl, FilterQueryKey } from '../../const/filter';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPriceMin, getPriceMax } from '../../store/filter-data/selectors';
+import { getPriceMin, getPriceMax, getMinMax } from '../../store/filter-data/selectors';
 import { changePriceMax, changePriceMin } from '../../store/action';
 
-function FilterPrice({ guitars, handleFilterChange }: FilterPriceComponent): JSX.Element {
-  const [min, max] = getMinMaxPrice(guitars);
+function FilterPrice({ handleFilterChange }: FilterPriceComponent): JSX.Element {
   const dispatch = useDispatch();
+  const [min, max] = useSelector(getMinMax);
   const priceMin = useSelector(getPriceMin);
   const priceMax = useSelector(getPriceMax);
 

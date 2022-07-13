@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { FilterStringsComponent } from '../../types/filter';
 import { getGuitarTypeState, getStringsState } from '../../store/filter-data/selectors';
 import { FilterQueryKey } from '../../const/filter';
-import { getDefaultDisabledState } from '../../utils/filter';
+import { getStringsDisabledState } from '../../utils/filter';
 
 function FilterStrings({ handleFilterChange }: FilterStringsComponent): JSX.Element {
   const stringsState = useSelector(getStringsState);
   const { acoustic, electric, ukulele } = useSelector(getGuitarTypeState);
-  const [disabledState, setDisabledState] = useState(getDefaultDisabledState());
+  const [disabledState, setDisabledState] = useState(getStringsDisabledState());
 
   const handleStringsFilterChange = (key: FilterQueryKey, value: boolean) => {
     handleFilterChange(key, !value);
@@ -22,7 +22,7 @@ function FilterStrings({ handleFilterChange }: FilterStringsComponent): JSX.Elem
         || (acoustic && electric && !ukulele)
         || (acoustic && !electric && ukulele)
       ) {
-        setDisabledState(getDefaultDisabledState());
+        setDisabledState(getStringsDisabledState());
       } else if (acoustic && !electric && !ukulele) {
         setDisabledState({
           fourStrings: true,
@@ -47,7 +47,7 @@ function FilterStrings({ handleFilterChange }: FilterStringsComponent): JSX.Elem
       }
 
     } else {
-      setDisabledState(getDefaultDisabledState());
+      setDisabledState(getStringsDisabledState());
     }
   }, [acoustic, electric, ukulele]);
 

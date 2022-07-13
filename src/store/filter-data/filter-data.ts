@@ -1,10 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { FilterData } from '../../types/filter';
-import { changeFilterStatus, changeFilterStrings, changeFilterType, changePriceMax, changePriceMin, resetFilterState } from '../action';
+import {
+  changeFilterStatus,
+  changeFilterStrings,
+  changeFilterType,
+  changeMinMax,
+  changePriceMax,
+  changePriceMin,
+  resetFilterState
+} from '../action';
 
 const initialState: FilterData = {
   priceMin: '',
   priceMax: '',
+  minMax: [0, 0],
   isActive: false,
   guitarType: {
     acoustic: false,
@@ -30,6 +39,11 @@ const filterData = createReducer(initialState, (builder) => {
       const {priceMax} = action.payload;
 
       state.priceMax = priceMax;
+    })
+    .addCase(changeMinMax, (state, action) => {
+      const {minMax} = action.payload;
+
+      state.minMax = minMax;
     })
     .addCase(changeFilterStatus, (state, action) => {
       const {isActive} = action.payload;

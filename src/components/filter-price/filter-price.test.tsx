@@ -60,6 +60,7 @@ const store = mockStore({
   FILTER: {
     priceMin: '',
     priceMax: '',
+    minMax: [0, 0],
     isActive: false,
     guitarType: {
       acoustic: false,
@@ -83,7 +84,6 @@ const fakeApp = (
       <Route exact path='/catalog'>
         <FilterPrice
           handleFilterChange={handleFilterChange}
-          guitars={mockGuitars}
         />
       </Route>
     </Router>
@@ -93,8 +93,14 @@ describe('Component: FilterPrice', () => {
   it('should render correctly', () => {
     history.push('/catalog');
     render(fakeApp);
-    const minPriceInput = screen.getByPlaceholderText('6 800');
-    const maxPriceInput = screen.getByPlaceholderText('29 500');
+    const priceInputs = screen.getAllByRole('spinbutton');
+
+    const minPriceInput = priceInputs[0];
+    expect(minPriceInput).toHaveAttribute('id', 'priceMin');
+
+    const maxPriceInput = priceInputs[1];
+    expect(maxPriceInput).toHaveAttribute('id', 'priceMax');
+
     expect(minPriceInput).toBeInTheDocument();
     expect(maxPriceInput).toBeInTheDocument();
   });
