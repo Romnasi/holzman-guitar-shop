@@ -76,9 +76,15 @@ export const getFilteredGuitars = (sortedGuitars: GuitarsData, filterState: Filt
   return filteredGuitars;
 };
 
-export const getDefaultDisabledState = () => ({
+export const getStringsDisabledState = () => ({
   fourStrings: false,
   sixStrings: false,
   sevenStrings: false,
   twelveStrings: false,
+});
+
+export const getTypeDisabledState = () => ({
+  acoustic: false,
+  electric: false,
+  ukulele: false,
 });
