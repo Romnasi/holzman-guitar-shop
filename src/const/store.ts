@@ -1,4 +1,4 @@
 export enum NameSpace {
-  data = 'DATA',
-  filter = 'FILTER',
+  DATA = 'DATA',
+  FILTER = 'FILTER',
 }
