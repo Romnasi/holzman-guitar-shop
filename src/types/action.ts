@@ -23,6 +23,7 @@ export enum ActionType {
   ChangeFilterType = 'filter/changeFilterType',
   ChangeFilterStrings = 'filter/changeFilterStrings',
   ResetFilterState = 'filter/resetFilterState',
+  AddGuitarToCard = 'cart/addGuitarToCard',
   RedirectToRoute = 'ui/redirectToRoute',
 }
 
