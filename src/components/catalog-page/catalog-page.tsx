@@ -1,22 +1,28 @@
-import Header from '../header/header';
-import Footer from '../footer/footer';
-import CatalogMain from '../catalog-main/catalog-main';
-import { useSelector } from 'react-redux';
-import { getLoadedCommentsStatus, getLoadedDataStatus } from '../../store/catalog-data/selectors';
-import LoadingScreen from '../loading-screen/loading-screen';
+import { catalogBreadcrumbs } from '../../const/breadcrumbs';
+import Breadcrumbs from '../breadcrumbs/breadcrumbs';
+import CatalogCards from '../catalog-cards/catalog-cards';
+import CatalogFilter from '../catalog-filter/catalog-filter';
+import CatalogSort from '../catalog-sort/catalog-sort';
+import Pagination from '../pagination/pagination';
+import PageTemplate from '../../hocs/page-template';
 
-function CatalogPage(): JSX.Element {
-  const isDataLoaded = useSelector(getLoadedDataStatus);
-  const isCommentsLoaded = useSelector(getLoadedCommentsStatus);
-
+function CatalogMain(): JSX.Element {
   return (
-    <div className="wrapper">
-      <Header/>
-      {!isDataLoaded && !isCommentsLoaded && <LoadingScreen />}
-      {isDataLoaded && isCommentsLoaded && <CatalogMain />}
-      <Footer/>
-    </div>
+    <PageTemplate>
+      <main className="page-content">
+        <div className="container">
+          <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
+          <Breadcrumbs crumbs={catalogBreadcrumbs}  />
+          <div className="catalog">
+            <CatalogFilter />
+            <CatalogSort />
+            <CatalogCards />
+            <Pagination />
+          </div>
+        </div>
+      </main>
+    </PageTemplate>
   );
 }
 
-export default CatalogPage;
+export default CatalogMain;
