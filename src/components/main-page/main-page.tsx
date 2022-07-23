@@ -10,6 +10,7 @@ function MainPage(): JSX.Element {
           <h1>Главная</h1>
           <ol>
             <li><Link to={AppRoute.CATALOG}>Каталог</Link></li>
+            <li><Link to={AppRoute.CART}>Корзина</Link></li>
           </ol>
         </div>
       </main>
