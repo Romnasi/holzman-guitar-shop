@@ -3,11 +3,34 @@ import { formatter, getBigImagePath, capitalizeFirstLetter } from '../../utils/c
 import ProductRate from '../product-rate/product-rate';
 import { Link } from 'react-router-dom';
 import { CardType } from '../../const/rate';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addGuitarToCard } from '../../store/action';
 import { useState, useCallback } from 'react';
 import ModalAddToCard from '../modal-add-to-card/modal-add-to-card';
 import ModalSuccessAdd from '../modal-success-add/modal-success-add';
+import { getCartGuitars } from '../../store/cart-data/selectors';
+import { AppRoute } from '../../const/app-route';
+
+const getCartButton = (isAddedToCart: boolean, handleAddButtonClick: () => void) => {
+  if (isAddedToCart) {
+    return (
+      <Link
+        className="button button--red-border button--mini button--in-cart"
+        to={AppRoute.CART}
+      >
+        В Корзине
+      </Link>
+    );
+  }
+  return (
+    <button
+      className="button button--red button--mini button--add-to-cart"
+      onClick={handleAddButtonClick}
+    >
+      Купить
+    </button>
+  );
+};
 
 function ProductCard(props: GuitarData): JSX.Element {
   const [isHiddenModal, setIsHiddenModal] = useState(true);
@@ -15,6 +38,8 @@ function ProductCard(props: GuitarData): JSX.Element {
 
   const { name, previewImg, price, type, rating, vendorCode, id } = props;
   const dispatch = useDispatch();
+  const cartGuitars = useSelector(getCartGuitars);
+  const isAddedToCart = cartGuitars.map(({ id: guitarId }) => guitarId).includes(id);
 
   const handleModalClose = useCallback(
     () => {
@@ -28,10 +53,14 @@ function ProductCard(props: GuitarData): JSX.Element {
     }, [],
   );
 
-  const handleAddGuitar = () => {
+  const handleModalAddGuitar = () => {
     dispatch(addGuitarToCard(props));
     handleModalClose();
     setIsHiddenModalSuccess(false);
+  };
+
+  const handleAddButtonClick = () => {
+    setIsHiddenModal(false);
   };
 
   return (
@@ -40,7 +69,7 @@ function ProductCard(props: GuitarData): JSX.Element {
         productData={props}
         isHiddenModal={isHiddenModal}
         handleModalClose={handleModalClose}
-        handleAddGuitar={handleAddGuitar}
+        handleAddGuitar={handleModalAddGuitar}
       />
 
       <ModalSuccessAdd
@@ -75,12 +104,7 @@ function ProductCard(props: GuitarData): JSX.Element {
           Подробнее
         </Link>
 
-        <button
-          className="button button--red button--mini button--add-to-cart"
-          onClick={() => setIsHiddenModal(false)}
-        >
-          Купить
-        </button>
+        {getCartButton(isAddedToCart, handleAddButtonClick)}
       </div>
     </article>
   );
