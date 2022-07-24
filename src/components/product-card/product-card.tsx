@@ -7,9 +7,11 @@ import { useDispatch } from 'react-redux';
 import { addGuitarToCard } from '../../store/action';
 import { useState, useCallback } from 'react';
 import ModalAddToCard from '../modal-add-to-card/modal-add-to-card';
+import ModalSuccessAdd from '../modal-success-add/modal-success-add';
 
 function ProductCard(props: GuitarData): JSX.Element {
   const [isHiddenModal, setIsHiddenModal] = useState(true);
+  const [isHiddenModalSuccess, setIsHiddenModalSuccess] = useState(true);
 
   const { name, previewImg, price, type, rating, vendorCode, id } = props;
   const dispatch = useDispatch();
@@ -20,9 +22,16 @@ function ProductCard(props: GuitarData): JSX.Element {
     }, [],
   );
 
+  const handleModalSuccessClose = useCallback(
+    () => {
+      setIsHiddenModalSuccess(true);
+    }, [],
+  );
+
   const handleAddGuitar = () => {
     dispatch(addGuitarToCard(props));
     handleModalClose();
+    setIsHiddenModalSuccess(false);
   };
 
   return (
@@ -32,6 +41,11 @@ function ProductCard(props: GuitarData): JSX.Element {
         isHiddenModal={isHiddenModal}
         handleModalClose={handleModalClose}
         handleAddGuitar={handleAddGuitar}
+      />
+
+      <ModalSuccessAdd
+        isHiddenModal={isHiddenModalSuccess}
+        handleModalClose={handleModalSuccessClose}
       />
 
       <img
