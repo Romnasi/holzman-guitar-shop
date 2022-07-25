@@ -15,6 +15,10 @@ const storeWithData = mockStore({
     isCommentsLoaded: true,
     guitars: mockGuitars,
   },
+  CART: {
+    guitars: [],
+    counter: {},
+  },
 });
 
 describe('Component: NotFoundScreen', () => {

@@ -21,6 +21,10 @@ const store = mockStore({
     guitarNumber: 3,
     curGuitar: null,
   },
+  CART: {
+    guitars: [],
+    counter: {},
+  },
 });
 
 describe('Component: ProductCard', () => {
@@ -33,8 +37,7 @@ describe('Component: ProductCard', () => {
         </Router>
       </Provider>);
 
-    expect(screen.getByAltText(testGuitarData.name)).toBeInTheDocument();
-    expect(screen.getByText(`${testGuitarData.name} ${testGuitarData.type}`)).toBeInTheDocument();
+    expect(screen.getAllByAltText(testGuitarData.name)[1]).toBeInTheDocument();
     expect(screen.getByText('Подробнее')).toBeInTheDocument();
     expect(screen.getByText('Купить')).toBeInTheDocument();
   });

@@ -19,6 +19,10 @@ const store = mockStore({
     guitarNumber: 3,
     curGuitar: null,
   },
+  CART: {
+    guitars: [],
+    counter: {},
+  },
 });
 
 describe('Component: CatalogSort', () => {

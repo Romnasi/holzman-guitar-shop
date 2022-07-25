@@ -19,6 +19,10 @@ const store = mockStore({
     guitarNumber: 3,
     curGuitar: null,
   },
+  CART: {
+    guitars: [],
+    counter: {},
+  },
 });
 
 const someGuitarData = mockGuitars[0];
@@ -40,7 +44,7 @@ describe('Component: ProductMain', () => {
       </Provider>);
 
     expect(screen.getByRole('heading', {level: 1}).textContent).toContain(someGuitarData.name);
-    expect(screen.getByAltText(someGuitarData.name)).toBeInTheDocument();
-    expect(screen.getByText('Добавить в корзину')).toBeInTheDocument();
+    expect(screen.getAllByAltText(someGuitarData.name)[1]).toBeInTheDocument();
+    expect(screen.getAllByText('Добавить в корзину')[1]).toBeInTheDocument();
   });
 });

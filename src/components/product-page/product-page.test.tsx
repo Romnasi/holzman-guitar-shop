@@ -17,6 +17,10 @@ const storeWithoutData = mockStore({
     isDataLoaded: false,
     isCommentsLoaded: false,
   },
+  CART: {
+    guitars: [],
+    counter: {},
+  },
 });
 
 const storeWithData = mockStore({
@@ -28,6 +32,10 @@ const storeWithData = mockStore({
     curPagination: 1,
     guitarNumber: 3,
     curGuitar: someGuitarData,
+  },
+  CART: {
+    guitars: [],
+    counter: {},
   },
 });
 
