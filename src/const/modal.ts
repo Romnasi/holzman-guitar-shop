@@ -4,7 +4,7 @@ export const enum Key {
 }
 
 export enum GuitarType {
-  acoustic = 'Акустическая',
+  acoustic = 'Акустическая гитара',
   electric = 'Электрогитара',
   ukulele = 'Укулеле',
 }

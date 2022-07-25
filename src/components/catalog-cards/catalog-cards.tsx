@@ -7,8 +7,7 @@ import { PaginationData } from '../../const/pagination';
 import { getSortedGuitars } from '../../utils/sort';
 import { getFilterState } from '../../store/filter-data/selectors';
 import { changeGuitarNumber, changeMinMax } from '../../store/action';
-import { getFilteredGuitars } from '../../utils/filter';
-import { getMinMaxPrice } from '../../utils/filter';
+import { getFilteredGuitars, getMinMaxPrice } from '../../utils/filter';
 
 function CatalogCards(): JSX.Element {
   const dispatch = useDispatch();

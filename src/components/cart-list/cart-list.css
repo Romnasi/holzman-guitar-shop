@@ -6,3 +6,10 @@
 
   list-style: none;
 }
+
+.cart__status {
+  display: block;
+  font-size: 18px;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
