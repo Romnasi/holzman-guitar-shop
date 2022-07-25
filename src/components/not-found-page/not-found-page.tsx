@@ -1,15 +1,11 @@
 import './not_found-page.css';
-
-import Header from '../header/header';
-import Footer from '../footer/footer';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/app-route';
+import PageTemplate from '../../hocs/page-template';
 
 function NotFoundPage(): JSX.Element {
   return(
-    <div className="wrapper">
-      <Header/>
-
+    <PageTemplate hasData={false}>
       <main className='page-content'>
         <div className='container not-found'>
           <h1 className="glitch" data-text="404">
@@ -23,9 +19,7 @@ function NotFoundPage(): JSX.Element {
           </Link>
         </div>
       </main>
-
-      <Footer/>
-    </div>
+    </PageTemplate>
   );
 }
 

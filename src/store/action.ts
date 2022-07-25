@@ -122,3 +122,8 @@ export const changeFilterStrings = createAction(
 );
 
 export const resetFilterState = createAction(ActionType.ResetFilterState);
+
+export const addGuitarToCard = createAction(
+  ActionType.AddGuitarToCard,
+  (guitar: GuitarData) => ({ payload: { guitar } }),
+);

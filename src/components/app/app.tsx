@@ -4,6 +4,7 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import { AppRoute } from '../../const/app-route';
 import MainPage from '../main-page/main-page';
 import ProductPage from '../product-page/product-page';
+import CartPage from '../cart-page/cart-page';
 
 function App(): JSX.Element {
   return (
@@ -22,6 +23,10 @@ function App(): JSX.Element {
 
       <Route exact path={AppRoute.PRODUCT}>
         <ProductPage />
+      </Route>
+
+      <Route exact path={AppRoute.CART}>
+        <CartPage />
       </Route>
 
       <Route path="*">

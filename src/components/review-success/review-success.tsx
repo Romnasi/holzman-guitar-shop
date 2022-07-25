@@ -1,6 +1,4 @@
-type ReviewSuccessComponent = {
-  handleModalClose: () => void;
-}
+import { ReviewSuccessComponent } from '../../types/modal';
 
 function ReviewSuccess({handleModalClose}: ReviewSuccessComponent): JSX.Element {
   return(

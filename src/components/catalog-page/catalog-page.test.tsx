@@ -16,6 +16,10 @@ const storeWithoutData = mockStore({
     isCommentsLoaded: false,
     sortType: defaultSortType,
   },
+  CART: {
+    guitars: [],
+    counter: {},
+  },
 });
 
 const storeWithData = mockStore({
@@ -45,6 +49,10 @@ const storeWithData = mockStore({
       sevenStrings: false,
       twelveStrings: false,
     },
+  },
+  CART: {
+    guitars: [],
+    counter: {},
   },
 });
 

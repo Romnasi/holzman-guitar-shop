@@ -38,6 +38,10 @@ const store = mockStore({
       twelveStrings: false,
     },
   },
+  CART: {
+    guitars: [],
+    counter: {},
+  },
 });
 
 const someGuitarData = mockGuitars[0];

@@ -1,8 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { addComment, addCurGuitar, changeCurPagination, changeGuitarNumber, changeSortType, loadComments, loadGuitars } from '../action';
 import { CatalogData } from '../../types/card-data';
 import { PaginationData } from '../../const/pagination';
 import { defaultSortType } from '../../const/sort';
+import {
+  addComment,
+  addCurGuitar,
+  changeCurPagination,
+  changeGuitarNumber,
+  changeSortType,
+  loadComments,
+  loadGuitars
+} from '../action';
 
 const initialState: CatalogData = {
   guitars: [],

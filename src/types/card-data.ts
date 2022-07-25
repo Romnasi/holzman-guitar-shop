@@ -44,3 +44,9 @@ export type CatalogData = {
   curGuitar: GuitarData | null;
   sortType: CatalogSortType;
 };
+
+export type GuitarTypes = {
+  acoustic: string;
+  electric: string;
+  ukulele: string;
+}
