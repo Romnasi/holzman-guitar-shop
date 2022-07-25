@@ -4,8 +4,17 @@ import { useDispatch } from 'react-redux';
 import { redirectToRoute } from '../../store/action';
 import { AppRoute } from '../../const/app-route';
 
-function ModalSuccessAdd({ isHiddenModal, handleModalClose }: ModalSuccessAddComponent): JSX.Element {
+function ModalSuccessAdd({ isHiddenModal, pageRoute, handleModalClose }: ModalSuccessAddComponent): JSX.Element {
   const dispatch = useDispatch();
+
+  const handleContinueToBuyButton = () => {
+    if (pageRoute === AppRoute.PRODUCT) {
+      handleModalClose();
+      setTimeout(() => dispatch(redirectToRoute(AppRoute.CATALOG)), 100);
+      return;
+    }
+    handleModalClose();
+  };
 
   return(
     <Modal
@@ -30,15 +39,11 @@ function ModalSuccessAdd({ isHiddenModal, handleModalClose }: ModalSuccessAddCom
           </button>
           <button
             className="button button--black-border button--small modal__button modal__button--right"
-            onClick={handleModalClose}
+            onClick={handleContinueToBuyButton}
           >
             Продолжить покупки
           </button>
         </div>
-        <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть">
-          <span className="button-cross__icon"></span>
-          <span className="modal__close-btn-interactive-area"></span>
-        </button>
       </>
     </Modal>
   );

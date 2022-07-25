@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import Reviews from '../reviews/reviews';
 import { getBigImagePath, formatter } from '../../utils/catalog-product';
@@ -6,7 +6,7 @@ import ProductRate from '../product-rate/product-rate';
 import ProductTabs from '../product-tabs/product-tabs';
 import { CardType } from '../../const/rate';
 import { useParams } from 'react-router-dom';
-import { redirectToRoute, addCurGuitar } from '../../store/action';
+import { redirectToRoute, addCurGuitar, addGuitarToCard } from '../../store/action';
 import { AppRoute } from '../../const/app-route';
 import { GuitarData } from '../../types/card-data';
 import { getGuitars, getComments } from '../../store/catalog-data/selectors';
@@ -14,8 +14,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentSortedReviews } from '../../utils/product';
 import { catalogBreadcrumbs } from '../../const/breadcrumbs';
 import LoadingScreen from '../loading-screen/loading-screen';
+import ModalAddToCard from '../modal-add-to-card/modal-add-to-card';
+import ModalSuccessAdd from '../modal-success-add/modal-success-add';
 
 function ProductMain(): JSX.Element {
+  const [isHiddenModal, setIsHiddenModal] = useState(true);
+  const [isHiddenModalSuccess, setIsHiddenModalSuccess] = useState(true);
+
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
 
@@ -31,6 +36,30 @@ function ProductMain(): JSX.Element {
       dispatch(redirectToRoute(AppRoute.NOT_FOUND));
     }
   }, [curGuitarIdx, curGuitar, dispatch]);
+
+  const handleModalClose = useCallback(
+    () => {
+      setIsHiddenModal(true);
+    }, [],
+  );
+
+  const handleModalSuccessClose = useCallback(
+    () => {
+      setIsHiddenModalSuccess(true);
+    }, [],
+  );
+
+  const handleModalAddGuitar = () => {
+    if (curGuitar) {
+      dispatch(addGuitarToCard(curGuitar));
+      handleModalClose();
+      setIsHiddenModalSuccess(false);
+    }
+  };
+
+  const handleAddButtonClick = () => {
+    setIsHiddenModal(false);
+  };
 
   if (!curGuitar) {
     return <LoadingScreen />;
@@ -49,6 +78,19 @@ function ProductMain(): JSX.Element {
       <div className="container">
         <h1 className="page-content__title title title--bigger">{curGuitar.name}</h1>
         <Breadcrumbs crumbs={catalogBreadcrumbs} dynamicLink={dynamicLink} />
+
+        <ModalAddToCard
+          productData={curGuitar}
+          isHiddenModal={isHiddenModal}
+          handleModalClose={handleModalClose}
+          handleAddGuitar={handleModalAddGuitar}
+        />
+
+        <ModalSuccessAdd
+          isHiddenModal={isHiddenModalSuccess}
+          handleModalClose={handleModalSuccessClose}
+          pageRoute={AppRoute.PRODUCT}
+        />
 
         <div className="product-container">
           <img
@@ -75,7 +117,10 @@ function ProductMain(): JSX.Element {
             <p className="product-container__price-info product-container__price-info--value">
               {formatter.format(curGuitar.price)} ₽
             </p>
-            <button className="button button--red button--big product-container__button">
+            <button
+              className="button button--red button--big product-container__button"
+              onClick={handleAddButtonClick}
+            >
               Добавить в корзину
             </button>
           </div>

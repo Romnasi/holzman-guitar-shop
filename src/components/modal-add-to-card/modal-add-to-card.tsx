@@ -50,10 +50,6 @@ function ModalAddToCard({
             Добавить в корзину
           </button>
         </div>
-        <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть">
-          <span className="button-cross__icon"></span>
-          <span className="modal__close-btn-interactive-area"></span>
-        </button>
       </>
     </Modal>
   );

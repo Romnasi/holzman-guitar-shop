@@ -1,3 +1,4 @@
+import { AppRoute } from '../const/app-route';
 import { GuitarData } from './card-data';
 
 export type ModalComponent = {
@@ -21,4 +22,5 @@ export type ModalAddToCardComponent = {
 export type ModalSuccessAddComponent = {
   isHiddenModal: boolean;
   handleModalClose: () => void;
+  pageRoute?: AppRoute;
 }
