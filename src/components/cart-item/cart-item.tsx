@@ -2,8 +2,13 @@ import { GuitarData, GuitarTypes } from '../../types/card-data';
 import { GuitarType } from '../../const/modal';
 import { getCartName } from '../../utils/cart';
 import { formatter, getBigImagePath } from '../../utils/catalog-product';
+import CartItemQuantity from '../cart-item-quantity/cart-item-quantity';
+import { useSelector } from 'react-redux';
+import { getCartCounter } from '../../store/cart-data/selectors';
 
-function CartItem({ previewImg, name, type, stringCount, vendorCode, price }: GuitarData): JSX.Element {
+function CartItem({ previewImg, name, type, stringCount, vendorCode, price, id }: GuitarData): JSX.Element {
+  const count = useSelector(getCartCounter)[id.toString()];
+
   return(
     <div className="cart-item">
       <button className="cart-item__close-button button-cross" type="button" aria-label="Удалить">
@@ -28,27 +33,10 @@ function CartItem({ previewImg, name, type, stringCount, vendorCode, price }: Gu
         </p>
       </div>
       <div className="cart-item__price">{formatter.format(price)} ₽</div>
-      <div className="quantity cart-item__quantity">
-        <button className="quantity__button" aria-label="Уменьшить количество">
-          <svg width="8" height="8" aria-hidden="true">
-            <use xlinkHref="#icon-minus"></use>
-          </svg>
-        </button>
-        <input
-          className="quantity__input"
-          type="number"
-          placeholder="1"
-          id="2-count"
-          name="2-count"
-          max="99"
-        />
-        <button className="quantity__button" aria-label="Увеличить количество">
-          <svg width="8" height="8" aria-hidden="true">
-            <use xlinkHref="#icon-plus"></use>
-          </svg>
-        </button>
-      </div>
-      <div className="cart-item__price-total">17 500 ₽</div>
+
+      <CartItemQuantity id={id} />
+
+      <div className="cart-item__price-total">{formatter.format(price * count)} ₽</div>
     </div>
   );
 }

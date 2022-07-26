@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { addGuitarToCard } from '../action';
+import { addGuitarToCard, changeCartCounter } from '../action';
 import { CartData } from '../../types/cart';
 
 const initialState: CartData = {
@@ -11,14 +11,24 @@ const cartData = createReducer(initialState, (builder) => {
   builder
     .addCase(addGuitarToCard, (state, action) => {
       const { guitar } = action.payload;
-
       const guitarId = guitar.id.toString();
-      if (state.counter[guitarId]) {
-        state.counter[guitar.id]++;
+      const prevCount = state.counter[guitarId];
+
+      if (prevCount || prevCount === 0) {
+        state.counter[guitarId]++;
         return;
       }
-      state.counter[guitar.id] = 1;
+      state.counter[guitarId] = 1;
       state.guitars = [...state.guitars, guitar];
+    })
+    .addCase(changeCartCounter, (state, action) => {
+      const { counter } = action.payload;
+
+      const [guitarId, guitarCount] = Object.entries(counter)[0];
+      const prevCount = state.counter[guitarId];
+      if (prevCount || prevCount === 0) {
+        state.counter[guitarId] = guitarCount;
+      }
     });
 });
 
