@@ -133,3 +133,8 @@ export const changeCartCounter = createAction(
   ActionType.ChangeCartCounter,
   (counter: CounterItem) => ({ payload: { counter } }),
 );
+
+export const deleteProduct = createAction(
+  ActionType.DeleteProduct,
+  (id: number) => ({ payload: { id } }),
+);

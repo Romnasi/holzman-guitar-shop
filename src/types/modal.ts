@@ -19,6 +19,13 @@ export type ModalAddToCardComponent = {
   handleAddGuitar: () => void;
 }
 
+export type ModalDeleteProductComponent = {
+  isHiddenModal: boolean;
+  productData: GuitarData;
+  handleModalClose: () => void;
+  handleDeleteButtonClick: () => void;
+}
+
 export type ModalSuccessAddComponent = {
   isHiddenModal: boolean;
   handleModalClose: () => void;

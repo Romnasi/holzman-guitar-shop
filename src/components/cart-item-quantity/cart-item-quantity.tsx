@@ -4,12 +4,18 @@ import { getCartCounter } from '../../store/cart-data/selectors';
 import { CartItemQuantityComponent } from '../../types/cart';
 import { Cart } from '../../const/cart';
 
-function CartItemQuantity({ id }: CartItemQuantityComponent): JSX.Element {
+function CartItemQuantity({ id, handleModalOpen }: CartItemQuantityComponent): JSX.Element {
   const dispatch = useDispatch();
   const count = useSelector(getCartCounter)[id.toString()];
 
   const handleIncreaseBtnClick = () => setCount(count + Cart.COUNT_STEP);
-  const handleDecreaseBtnClick = () => setCount(count - Cart.COUNT_STEP);
+  const handleDecreaseBtnClick = () => {
+    if (count === Cart.MIN_COUNT) {
+      handleModalOpen();
+      return;
+    }
+    setCount(count - Cart.COUNT_STEP);
+  };
 
   const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const input = evt.target as HTMLInputElement;

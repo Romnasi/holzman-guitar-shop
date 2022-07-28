@@ -15,4 +15,5 @@ export type CartData = {
 
 export type CartItemQuantityComponent = {
   id: number;
+  handleModalOpen: () => void;
 }
