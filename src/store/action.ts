@@ -4,6 +4,7 @@ import { AppRoute } from '../const/app-route';
 import { CatalogSortType, GuitarData } from '../types/card-data';
 import { ReviewData } from '../types/review';
 import { MinMax, UpdateGuitarType, UpdateStrings } from '../types/filter';
+import { CounterItem } from '../types/cart';
 
 export const loadGuitars = createAction(
   ActionType.LoadGuitars,
@@ -126,4 +127,14 @@ export const resetFilterState = createAction(ActionType.ResetFilterState);
 export const addGuitarToCard = createAction(
   ActionType.AddGuitarToCard,
   (guitar: GuitarData) => ({ payload: { guitar } }),
+);
+
+export const changeCartCounter = createAction(
+  ActionType.ChangeCartCounter,
+  (counter: CounterItem) => ({ payload: { counter } }),
+);
+
+export const deleteProduct = createAction(
+  ActionType.DeleteProduct,
+  (id: number) => ({ payload: { id } }),
 );
