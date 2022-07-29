@@ -5,6 +5,8 @@ import { CartData } from '../../types/cart';
 const initialState: CartData = {
   guitars: [],
   counter: {},
+  coupon: '',
+  discount: 0,
 };
 
 const cartData = createReducer(initialState, (builder) => {

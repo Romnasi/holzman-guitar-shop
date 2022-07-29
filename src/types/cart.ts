@@ -11,6 +11,8 @@ export type ProductCounter = {
 export type CartData = {
   guitars: GuitarsData;
   counter: ProductCounter;
+  coupon: string;
+  discount: number;
 };
 
 export type CartItemQuantityComponent = {
