@@ -4,7 +4,7 @@ import { AppRoute } from '../const/app-route';
 import { CatalogSortType, GuitarData } from '../types/card-data';
 import { ReviewData } from '../types/review';
 import { MinMax, UpdateGuitarType, UpdateStrings } from '../types/filter';
-import { CounterItem } from '../types/cart';
+import { CounterItem, CouponStatus } from '../types/cart';
 
 export const loadGuitars = createAction(
   ActionType.LoadGuitars,
@@ -137,4 +137,19 @@ export const changeCartCounter = createAction(
 export const deleteProduct = createAction(
   ActionType.DeleteProduct,
   (id: number) => ({ payload: { id } }),
+);
+
+export const addDiscount = createAction(
+  ActionType.AddDiscount,
+  (discount: number) => ({ payload: { discount } }),
+);
+
+export const addCoupon = createAction(
+  ActionType.AddCoupon,
+  (coupon: string) => ({ payload: { coupon } }),
+);
+
+export const changeCouponStatus = createAction(
+  ActionType.ChangeCouponStatus,
+  (status: CouponStatus) => ({ payload: { status } }),
 );

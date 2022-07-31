@@ -10,6 +10,7 @@ function CartTotal(): JSX.Element {
   const totalPrice = getTotalPrice(cartGuitars, cartCounter);
   const discountSize = getDiscountSize(totalPrice, discount);
   const totalPriceWithDiscount = getTotalPriceWithDiscount(totalPrice, discount);
+  const discountClass = discountSize ? 'cart__total-value cart__total-value--bonus' : 'cart__total-value';
 
   return(
     <div className="cart__total-info">
@@ -19,7 +20,7 @@ function CartTotal(): JSX.Element {
       </p>
       <p className="cart__total-item">
         <span className="cart__total-value-name">Скидка:</span>
-        <span className="cart__total-value cart__total-value--bonus">
+        <span className={discountClass}>
           {getFomattedDiscount(discountSize)}
         </span>
       </p>

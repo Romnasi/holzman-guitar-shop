@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { addGuitarToCard, changeCartCounter, deleteProduct } from '../action';
+import { addCoupon, addDiscount, addGuitarToCard, changeCartCounter, changeCouponStatus, deleteProduct } from '../action';
 import { CartData } from '../../types/cart';
 
 const initialState: CartData = {
@@ -7,6 +7,7 @@ const initialState: CartData = {
   counter: {},
   coupon: '',
   discount: 0,
+  couponStatus: null,
 };
 
 const cartData = createReducer(initialState, (builder) => {
@@ -50,6 +51,18 @@ const cartData = createReducer(initialState, (builder) => {
         delete counter[guitarId];
         state.counter = counter;
       }
+    })
+    .addCase(addDiscount, (state, action) => {
+      const { discount } = action.payload;
+      state.discount = discount;
+    })
+    .addCase(addCoupon, (state, action) => {
+      const { coupon } = action.payload;
+      state.coupon = coupon;
+    })
+    .addCase(changeCouponStatus, (state, action) => {
+      const { status } = action.payload;
+      state.couponStatus = status;
     });
 });
 

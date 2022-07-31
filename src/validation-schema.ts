@@ -20,3 +20,9 @@ export const ReviewSchema = Yup.object().shape({
     .max(1000, 'Не более 1000 знаков!')
     .required('Заполните поле'),
 });
+
+export const CouponSchema = Yup.object().shape({
+  coupon: Yup.string()
+    .max(50, 'Не более 50 знаков!')
+    .required('Промокод не введен'),
+});
