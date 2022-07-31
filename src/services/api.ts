@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosResponse, AxiosError} from 'axios';
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { BASE_URL, REQUEST_TIMEOUT } from '../const/api';
 
 export const createAPI = (): AxiosInstance => {

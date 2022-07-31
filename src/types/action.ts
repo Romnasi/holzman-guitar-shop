@@ -24,6 +24,11 @@ export enum ActionType {
   ChangeFilterStrings = 'filter/changeFilterStrings',
   ResetFilterState = 'filter/resetFilterState',
   AddGuitarToCard = 'cart/addGuitarToCard',
+  ChangeCartCounter = 'cart/changeCartCounter',
+  DeleteProduct = 'cart/deleteProduct',
+  AddDiscount = 'cart/addDiscount',
+  AddCoupon = 'cart/addCoupon',
+  ChangeCouponStatus = 'cart/changeCouponStatus',
   RedirectToRoute = 'ui/redirectToRoute',
 }
 
