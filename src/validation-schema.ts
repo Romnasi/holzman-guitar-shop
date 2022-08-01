@@ -22,7 +22,10 @@ export const ReviewSchema = Yup.object().shape({
 });
 
 export const CouponSchema = Yup.object().shape({
-  coupon: Yup.string()
+  coupon: Yup
+    .string()
+    .test('coupon', 'Не используйте пробелы', (value) =>
+      !value?.includes(' '))
     .max(50, 'Не более 50 знаков!')
     .required('Промокод не введен'),
 });
