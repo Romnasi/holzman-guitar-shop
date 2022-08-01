@@ -70,7 +70,7 @@ describe('Async actions', () => {
     ]);
   });
 
-  it('should dispatch add discount when POST /coupon', async () => {
+  it('should dispatch addDiscount and changeCouponStatus when POST /coupon', async () => {
     const fakeCoupon = 'light-333';
     const fakeDiscount = 15;
     mockAPI
