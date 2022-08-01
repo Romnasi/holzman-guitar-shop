@@ -4,10 +4,10 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import { State } from '../types/state';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { fetchCommentsAction, fetchGuitarsAction, postCommentAction } from './api-actions';
+import { fetchCommentsAction, fetchGuitarsAction, postCommentAction, postCouponAction } from './api-actions';
 import { APIRoute, HTTP_CODE } from '../const/api';
 import { mockGuitars, mockComments } from '../const/mock';
-import { loadGuitars, loadComments, addComment } from './action';
+import { loadGuitars, loadComments, addComment, addDiscount, changeCouponStatus } from './action';
 import { ReviewData } from '../types/review';
 
 describe('Async actions', () => {
@@ -47,7 +47,7 @@ describe('Async actions', () => {
     ]);
   });
 
-  it('should dispatch Post Comment when POST /login', async () => {
+  it('should dispatch add Comment when POST /comments', async () => {
     const fakeReview: ReviewData = {
       guitarId: 1,
       userName: 'Test User',
@@ -67,6 +67,22 @@ describe('Async actions', () => {
 
     expect(store.getActions()).toEqual([
       addComment(fakeReview),
+    ]);
+  });
+
+  it('should dispatch add discount when POST /coupon', async () => {
+    const fakeCoupon = 'light-333';
+    const fakeDiscount = 15;
+    mockAPI
+      .onPost(APIRoute.COUPONS)
+      .reply(HTTP_CODE.OK, fakeDiscount);
+
+    const store = mockStore();
+    await store.dispatch(postCouponAction(fakeCoupon));
+
+    expect(store.getActions()).toEqual([
+      addDiscount(fakeDiscount),
+      changeCouponStatus(true),
     ]);
   });
 });
