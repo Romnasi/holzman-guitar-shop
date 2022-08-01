@@ -16,7 +16,9 @@ function CartTotal(): JSX.Element {
     <div className="cart__total-info">
       <p className="cart__total-item">
         <span className="cart__total-value-name">Всего:</span>
-        <span className="cart__total-value">{formatter.format(totalPrice)} ₽</span>
+        <span className="cart__total-value">
+          {`${formatter.format(totalPrice)} ₽`}
+        </span>
       </p>
       <p className="cart__total-item">
         <span className="cart__total-value-name">Скидка:</span>

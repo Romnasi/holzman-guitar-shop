@@ -61,9 +61,9 @@ function CartItem(props: GuitarData): JSX.Element {
           alt={getCartName(type, name)}
         />
       </div>
-      <div className="product-info cart-item__info">
+      <div className="product-info cart-item__info" data-testid="item-info">
         <p className="product-info__title">{getCartName(type, name)}</p>
-        <p className="product-info__info">Артикул: {vendorCode}</p>
+        <p className="product-info__info">{`Артикул: ${vendorCode}`}</p>
         <p className="product-info__info">
           {GuitarType[type as keyof GuitarTypes]}, {stringCount} струнная
         </p>
