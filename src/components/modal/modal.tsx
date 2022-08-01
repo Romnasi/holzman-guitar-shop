@@ -1,3 +1,4 @@
+import './modal.css';
 import { useEffect, useRef } from 'react';
 import { ModalComponent } from '../../types/modal';
 import { Key } from '../../const/modal';
