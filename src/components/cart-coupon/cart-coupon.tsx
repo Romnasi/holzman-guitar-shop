@@ -39,7 +39,7 @@ function CartCoupon(): JSX.Element {
         {({ errors, touched }) => (
           <Form className="coupon__form">
             <div className="form-input coupon__input">
-              <label className="visually-hidden">Промокод</label>
+              <label className="visually-hidden" htmlFor="coupon">Промокод</label>
               <Field
                 type="text"
                 placeholder="Введите промокод"

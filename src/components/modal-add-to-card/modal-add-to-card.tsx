@@ -1,4 +1,3 @@
-import './modal-add-to-card.css';
 import Modal from '../modal/modal';
 import { ModalAddToCardComponent } from '../../types/modal';
 import { formatter, getBigImagePath } from '../../utils/catalog-product';

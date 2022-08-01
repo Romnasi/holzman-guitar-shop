@@ -1,4 +1,4 @@
-import {RootState} from '../store/root-reducer';
+import { RootState } from '../store/root-reducer';
 import { GuitarData } from './card-data';
 
 
