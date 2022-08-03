@@ -46,7 +46,10 @@ function ModalDeleteProduct({
         <div className="modal__button-container">
           <button
             className="button button--small modal__button"
-            onClick={handleDeleteButtonClick}
+            onClick={() => {
+              handleModalClose();
+              setTimeout(() => handleDeleteButtonClick(), 100);
+            }}
           >
             Удалить товар
           </button>
