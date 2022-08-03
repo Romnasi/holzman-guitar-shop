@@ -32,8 +32,8 @@ function CartCoupon(): JSX.Element {
         validationSchema={CouponSchema}
         onSubmit={({ coupon }, actions) => {
           actions.setSubmitting(false);
-          dispatch(addCoupon(coupon));
-          dispatch(postCouponAction(coupon));
+          dispatch(addCoupon(coupon.trim()));
+          dispatch(postCouponAction(coupon.trim()));
         }}
       >
         {({ errors, touched }) => (
